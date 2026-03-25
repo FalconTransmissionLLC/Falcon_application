@@ -67,7 +67,7 @@ pointer-events:none;z-index:9999;
 animation:scanline 6s linear infinite;
 }
 
-#app{display:flex;flex-direction:column;height:100vh;position:relative;z-index:1}
+#app{flex-direction:column;height:100vh;position:relative;z-index:1}
 
 /* ── HEADER ── */
 .header{
@@ -381,9 +381,15 @@ background:var(–surf1);cursor:pointer;transition:all .2s;margin-bottom:10px;
 /* ── LOGIN SCREEN ── */
 #login-screen {
 position:fixed;inset:0;z-index:99999;
-background:var(–dark);
+background:#03030a;
+background-color:#03030a !important;
 display:flex;flex-direction:column;align-items:center;justify-content:center;
 padding:24px;
+/* Ensure it covers everything */
+top:0;left:0;right:0;bottom:0;
+width:100%;height:100%;
+overflow-y:auto;
+-webkit-overflow-scrolling:touch;
 }
 #login-screen::before {
 content:’’;position:fixed;inset:0;pointer-events:none;
@@ -492,7 +498,9 @@ color:var(–text2);cursor:pointer;letter-spacing:1px;
 transition:all .2s;
 }
 .logout-btn:hover{border-color:rgba(232,25,44,.4);color:var(–red)}
-#login-screen.hidden{display:none}
+#login-screen.hidden{display:none !important;visibility:hidden !important;pointer-events:none !important}
+/* Hide app by default via CSS until auth passes */
+#app{display:none}
 </style>
 
 </head>
@@ -1768,8 +1776,7 @@ var loginLogo = document.getElementById(‘login-logo-img’);
 if(appLogo && loginLogo) loginLogo.src = appLogo.src;
 })();
 
-// Hide app until auth is confirmed
-document.getElementById(‘app’).style.display = ‘none’;
+// App is hidden by CSS (#app { display:none }) until auth passes
 
 function checkAuth() {
 var raw = localStorage.getItem(AUTH_KEY) || sessionStorage.getItem(AUTH_KEY);
@@ -1779,7 +1786,9 @@ var d = JSON.parse(raw);
 if(d && d.loggedIn && d.username) { showApp(d.username); return; }
 } catch(e) {}
 }
-document.getElementById(‘login-screen’).classList.remove(‘hidden’);
+var ls = document.getElementById(‘login-screen’);
+ls.style.display = ‘flex’;
+ls.classList.remove(‘hidden’);
 }
 
 function attemptLogin() {
@@ -1808,8 +1817,11 @@ showApp(match.username);
 }
 
 function showApp(username) {
-document.getElementById(‘login-screen’).classList.add(‘hidden’);
-document.getElementById(‘app’).style.display = ‘’;
+var ls = document.getElementById(‘login-screen’);
+var app = document.getElementById(‘app’);
+ls.classList.add(‘hidden’);
+ls.style.display = ‘none’;
+app.style.display = ‘flex’;
 var user = null;
 for(var i=0;i<USERS.length;i++){ if(USERS[i].username===username){ user=USERS[i]; break; } }
 var vEl = document.querySelector(’.header-version’);
@@ -1828,7 +1840,9 @@ document.getElementById(‘login-error’).classList.remove(‘show’);
 var vEl = document.querySelector(’.header-version’);
 if(vEl) vEl.textContent = ‘SYS v3.0’;
 document.getElementById(‘app’).style.display = ‘none’;
-document.getElementById(‘login-screen’).classList.remove(‘hidden’);
+var ls = document.getElementById(‘login-screen’);
+ls.style.display = ‘flex’;
+ls.classList.remove(‘hidden’);
 }
 
 document.getElementById(‘login-pass’).addEventListener(‘keypress’, function(e){ if(e.key===‘Enter’) attemptLogin(); });
