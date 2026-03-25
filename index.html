@@ -932,8 +932,21 @@
 
 <div id="modal-container"></div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-const DB_KEY = 'falcon_complete_v2';
+// ── Firebase Setup ──
+const firebaseConfig = {
+  apiKey: "AIzaSyC16yNDrAYxudiTzC5MppDMVs2Ktf3fodc",
+  authDomain: "falcontransmissionsllc-99d8b.firebaseapp.com",
+  projectId: "falcontransmissionsllc-99d8b",
+  storageBucket: "falcontransmissionsllc-99d8b.firebasestorage.app",
+  messagingSenderId: "310619732130",
+  appId: "1:310619732130:web:1b7a4543d236034f473ffb"
+};
+firebase.initializeApp(firebaseConfig);
+const firestore = firebase.firestore();
+const DB_DOC = firestore.collection('falcon').doc('shopdata');
 
 let db = {
   repairOrders: [],
@@ -953,15 +966,52 @@ const REPAIR_SERVICES = [
   'Fluid Top-Up','Cooler Line Flush','Full Transmission Overhaul','CVT Service'
 ];
 
+function setSyncStatus(state) {
+  const dot = document.querySelector('.sync-dot');
+  const txt = document.querySelector('.sync-status span');
+  if (!dot || !txt) return;
+  if(state === 'saved') {
+    dot.style.background = 'var(--green)'; dot.style.boxShadow = '0 0 6px var(--green)'; txt.textContent = 'Saved';
+  } else if(state === 'saving') {
+    dot.style.background = 'var(--amber)'; dot.style.boxShadow = '0 0 6px var(--amber)'; txt.textContent = 'Saving…';
+  } else if(state === 'error') {
+    dot.style.background = 'var(--red)'; dot.style.boxShadow = '0 0 6px var(--red-glow)'; txt.textContent = 'Error';
+  } else if(state === 'live') {
+    dot.style.background = 'var(--green)'; dot.style.boxShadow = '0 0 6px var(--green)'; txt.textContent = 'Live';
+  } else if(state === 'connecting') {
+    dot.style.background = 'var(--amber)'; dot.style.boxShadow = '0 0 6px var(--amber)'; txt.textContent = 'Connecting…';
+  }
+}
+
 function saveData() {
-  try { localStorage.setItem(DB_KEY, JSON.stringify(db)); } catch(e) {}
+  setSyncStatus('saving');
+  DB_DOC.set(db)
+    .then(() => setSyncStatus('saved'))
+    .catch(e => { console.error('Save error:', e); setSyncStatus('error'); });
 }
 
 function loadData() {
-  try {
-    const stored = localStorage.getItem(DB_KEY);
-    if(stored) db = JSON.parse(stored);
-  } catch(e) {}
+  setSyncStatus('connecting');
+  DB_DOC.get().then(snap => {
+    if(snap.exists) { db = snap.data(); }
+    setSyncStatus('live');
+    renderDashboard();
+    // Start real-time listener
+    DB_DOC.onSnapshot(snap => {
+      if(snap.exists) {
+        db = snap.data();
+        renderDashboard();
+        renderRepairOrders();
+        renderInvoices();
+        renderCustomers();
+        setSyncStatus('live');
+      }
+    });
+  }).catch(e => {
+    console.error('Load error:', e);
+    setSyncStatus('error');
+    renderDashboard();
+  });
 }
 
 loadData();
@@ -1573,7 +1623,7 @@ function closeModal() {
   document.getElementById('modal-container').innerHTML = '';
 }
 
-renderDashboard();
+// renderDashboard called inside loadData after data is ready
 </script>
 </body>
 </html>
