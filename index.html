@@ -31,7 +31,7 @@
   }
 
 @keyframes pulse     { 0%,100%{opacity:1} 50%{opacity:.35} }
-@keyframes glow-r    { 0%,100%{box-shadow:0 0 8px var(–red-glow)} 50%{box-shadow:0 0 22px var(–red-glow),0 0 44px rgba(232,25,44,.25)} }
+@keyframes glow-r    { 0%,100%{box-shadow:0 0 8px rgba(232,25,44,0.65)} 50%{box-shadow:0 0 22px rgba(232,25,44,0.65),0 0 44px rgba(232,25,44,.25)} }
 @keyframes slideUp   { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
 @keyframes sweep     { 0%{left:-100%} 100%{left:200%} }
 @keyframes gridMove  { from{background-position:0 0} to{background-position:40px 40px} }
@@ -118,17 +118,17 @@ color:rgba(232,25,44,.85);text-transform:uppercase;
 .header-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
 .sync-status{
 font-family:‘Share Tech Mono’,monospace;
-font-size:9px;color:var(–green);font-weight:700;
+font-size:9px;color:#00e676;font-weight:700;
 display:flex;align-items:center;gap:5px;letter-spacing:1.5px;
 }
 .sync-dot{
-width:7px;height:7px;background:var(–green);border-radius:50%;
+width:7px;height:7px;background:#00e676;border-radius:50%;
 animation:pulse 2s infinite;
-box-shadow:0 0 8px var(–green),0 0 16px rgba(0,230,118,.4);
+box-shadow:0 0 8px #00e676,0 0 16px rgba(0,230,118,.4);
 }
 .header-version{
 font-family:‘Share Tech Mono’,monospace;
-font-size:8px;color:var(–text3);letter-spacing:1px;
+font-size:8px;color:#3a3860;letter-spacing:1px;
 }
 
 /* ── NAV TABS ── */
@@ -137,20 +137,20 @@ font-size:8px;color:var(–text3);letter-spacing:1px;
 display:flex;gap:4px;margin-bottom:12px;
 overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
 padding:4px;
-background:var(–surf1);
-border:1px solid var(–border);
+background:#07070f;
+border:1px solid #1e1e3a;
 border-radius:10px;
 }
 .nav-tabs::-webkit-scrollbar{display:none}
 .nav-tab{
 flex-shrink:0;padding:9px 14px;border:1px solid transparent;
-background:transparent;color:var(–text2);border-radius:7px;
+background:transparent;color:#7a78a0;border-radius:7px;
 font-family:‘Rajdhani’,sans-serif;
 font-size:11px;font-weight:700;cursor:pointer;
 transition:all .2s;text-transform:uppercase;letter-spacing:.8px;
 position:relative;
 }
-.nav-tab:hover{color:var(–text);background:var(–surf3);border-color:var(–border2)}
+.nav-tab:hover{color:#e8e6f8;background:#121224;border-color:#2e2e5a}
 .nav-tab.active{
 background:linear-gradient(135deg,rgba(232,25,44,.18) 0%,rgba(232,25,44,.08) 100%);
 color:#fff;border-color:rgba(232,25,44,.5);
@@ -164,8 +164,8 @@ text-shadow:0 0 12px rgba(232,25,44,.7);
 
 /* ── CARDS ── */
 .card{
-background:linear-gradient(145deg,var(–surf2) 0%,var(–surf3) 100%);
-border:1px solid var(–border);border-radius:12px;
+background:linear-gradient(145deg,#0d0d1a 0%,#121224 100%);
+border:1px solid #1e1e3a;border-radius:12px;
 padding:14px;margin-bottom:10px;
 transition:all .2s;position:relative;overflow:hidden;
 }
@@ -176,14 +176,14 @@ background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);
 .card:active{border-color:rgba(232,25,44,.4);box-shadow:0 0 14px rgba(232,25,44,.1)}
 .card-header{
 font-family:‘Orbitron’,monospace;
-font-size:10px;font-weight:700;color:var(–red);
+font-size:10px;font-weight:700;color:#e8192c;
 text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;
 }
 
 /* ── STAT BOXES ── */
 .stat-box{
-background:linear-gradient(135deg,var(–surf1) 0%,rgba(232,25,44,.04) 100%);
-border:1px solid var(–border);border-radius:12px;
+background:linear-gradient(135deg,#07070f 0%,rgba(232,25,44,.04) 100%);
+border:1px solid #1e1e3a;border-radius:12px;
 padding:16px;margin-bottom:10px;text-align:center;
 position:relative;overflow:hidden;
 }
@@ -193,12 +193,12 @@ background:linear-gradient(90deg,transparent,rgba(232,25,44,.3),transparent);
 }
 .stat-label{
 font-family:‘Share Tech Mono’,monospace;
-font-size:9px;color:var(–text2);text-transform:uppercase;
+font-size:9px;color:#7a78a0;text-transform:uppercase;
 letter-spacing:2px;margin-bottom:8px;font-weight:400;
 }
 .stat-value{
 font-family:‘Orbitron’,monospace;
-font-size:38px;font-weight:900;color:var(–red);
+font-size:38px;font-weight:900;color:#e8192c;
 text-shadow:0 0 20px rgba(232,25,44,.5);
 }
 
@@ -212,7 +212,7 @@ display:flex;align-items:center;justify-content:center;gap:6px;
 width:100%;margin-bottom:8px;position:relative;overflow:hidden;
 }
 .btn-primary{
-background:linear-gradient(135deg,#cc0f22 0%,var(–red) 50%,#ff2233 100%);
+background:linear-gradient(135deg,#cc0f22 0%,#e8192c 50%,#ff2233 100%);
 color:#fff;
 box-shadow:0 4px 16px rgba(232,25,44,.4),0 0 0 1px rgba(232,25,44,.3);
 }
@@ -224,12 +224,12 @@ transition:left .3s;
 .btn-primary:hover::before{left:100%}
 .btn-primary:active{transform:scale(.98);box-shadow:0 2px 8px rgba(232,25,44,.3)}
 .btn-secondary{
-background:var(–surf3);color:var(–text);
-border:1px solid var(–border2);
+background:#121224;color:#e8e6f8;
+border:1px solid #2e2e5a;
 }
-.btn-secondary:hover{border-color:rgba(232,25,44,.4);background:var(–surf4)}
+.btn-secondary:hover{border-color:rgba(232,25,44,.4);background:#181830}
 .btn-success{
-background:linear-gradient(135deg,#009d50 0%,var(–green) 100%);
+background:linear-gradient(135deg,#009d50 0%,#00e676 100%);
 color:#000;font-weight:800;
 box-shadow:0 4px 16px rgba(0,230,118,.3);
 }
@@ -240,14 +240,14 @@ box-shadow:0 4px 16px rgba(0,230,118,.3);
 label{
 display:block;
 font-family:‘Share Tech Mono’,monospace;
-font-size:9px;color:var(–text2);text-transform:uppercase;
+font-size:9px;color:#7a78a0;text-transform:uppercase;
 letter-spacing:1.2px;font-weight:400;margin-bottom:5px;
 }
 input,select,textarea{
 width:100%;padding:10px;
-background:var(–surf1);
-border:1px solid var(–border);border-radius:7px;
-color:var(–text);
+background:#07070f;
+border:1px solid #1e1e3a;border-radius:7px;
+color:#e8e6f8;
 font-family:‘Rajdhani’,sans-serif;font-size:13px;
 transition:all .2s;
 }
@@ -256,16 +256,16 @@ outline:none;border-color:rgba(232,25,44,.5);
 background:rgba(232,25,44,.04);
 box-shadow:0 0 0 2px rgba(232,25,44,.12),0 0 10px rgba(232,25,44,.08);
 }
-select option{background:var(–surf2);color:var(–text)}
+select option{background:#0d0d1a;color:#e8e6f8}
 textarea{resize:vertical;min-height:80px}
 .checkbox-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .checkbox-item{
 display:flex;align-items:center;gap:5px;
 font-family:‘Rajdhani’,sans-serif;font-size:12px;
-background:var(–surf1);border:1px solid var(–border);
+background:#07070f;border:1px solid #1e1e3a;
 border-radius:6px;padding:5px 8px;cursor:pointer;
 }
-.checkbox-item input{width:16px;height:16px;margin:0;cursor:pointer;accent-color:var(–red)}
+.checkbox-item input{width:16px;height:16px;margin:0;cursor:pointer;accent-color:#e8192c}
 
 /* ── MODAL ── */
 .modal-overlay{
@@ -274,7 +274,7 @@ z-index:1000;display:flex;align-items:flex-end;
 animation:slideUp .25s ease;
 }
 .modal{
-background:linear-gradient(175deg,var(–surf2) 0%,var(–surf3) 100%);
+background:linear-gradient(175deg,#0d0d1a 0%,#121224 100%);
 width:100%;border-radius:16px 16px 0 0;
 max-height:92vh;overflow-y:auto;
 padding:20px;padding-bottom:40px;
@@ -284,42 +284,42 @@ box-shadow:0 -8px 40px rgba(232,25,44,.15);
 .modal-header{
 font-family:‘Orbitron’,monospace;
 font-size:16px;font-weight:700;margin-bottom:18px;
-color:var(–red);text-transform:uppercase;letter-spacing:2px;
+color:#e8192c;text-transform:uppercase;letter-spacing:2px;
 text-shadow:0 0 14px rgba(232,25,44,.5);
 }
 .modal-close{
 position:fixed;top:14px;right:14px;
-background:var(–surf3);border:1px solid var(–border2);
-color:var(–text);width:38px;height:38px;border-radius:50%;
+background:#121224;border:1px solid #2e2e5a;
+color:#e8e6f8;width:38px;height:38px;border-radius:50%;
 font-size:18px;cursor:pointer;z-index:1001;
 display:flex;align-items:center;justify-content:center;
 transition:all .2s;
 }
-.modal-close:hover{border-color:var(–red);color:var(–red);box-shadow:0 0 10px rgba(232,25,44,.3)}
+.modal-close:hover{border-color:#e8192c;color:#e8192c;box-shadow:0 0 10px rgba(232,25,44,.3)}
 
 /* ── INVENTORY ITEMS ── */
 .inventory-item{
-background:linear-gradient(145deg,var(–surf1) 0%,var(–surf2) 100%);
-border:1px solid var(–border);border-radius:10px;
+background:linear-gradient(145deg,#07070f 0%,#0d0d1a 100%);
+border:1px solid #1e1e3a;border-radius:10px;
 padding:12px;margin-bottom:10px;
 transition:border-color .2s;
 }
-.inventory-item:hover{border-color:var(–border2)}
+.inventory-item:hover{border-color:#2e2e5a}
 .inventory-header{
 display:flex;justify-content:space-between;align-items:flex-start;
-margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(–border);
+margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #1e1e3a;
 }
 .inventory-title{
 font-family:‘Orbitron’,monospace;
-font-weight:700;color:var(–red);font-size:11px;letter-spacing:.5px;
+font-weight:700;color:#e8192c;font-size:11px;letter-spacing:.5px;
 }
 .inventory-detail{
 font-family:‘Rajdhani’,sans-serif;
-font-size:11px;color:var(–text2);margin-bottom:3px;padding:2px 0;
+font-size:11px;color:#7a78a0;margin-bottom:3px;padding:2px 0;
 }
 .location-badge{
 display:inline-block;
-background:rgba(232,25,44,.12);color:var(–red);
+background:rgba(232,25,44,.12);color:#e8192c;
 border:1px solid rgba(232,25,44,.25);
 padding:3px 7px;border-radius:4px;font-size:10px;font-weight:600;
 margin-right:4px;margin-bottom:4px;
@@ -327,7 +327,7 @@ font-family:‘Share Tech Mono’,monospace;
 }
 .qty-badge{
 display:inline-block;
-background:linear-gradient(135deg,#cc0f22 0%,var(–red) 100%);
+background:linear-gradient(135deg,#cc0f22 0%,#e8192c 100%);
 color:#fff;padding:5px 10px;border-radius:5px;
 font-family:‘Orbitron’,monospace;font-size:13px;font-weight:700;
 box-shadow:0 2px 8px rgba(232,25,44,.4);
@@ -335,57 +335,57 @@ box-shadow:0 2px 8px rgba(232,25,44,.4);
 
 /* ── STATUS BADGES ── */
 .status-badge{display:inline-block;padding:4px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.status-unpaid{background:rgba(232,53,69,.18);color:var(–red)}
-.status-paid{background:rgba(0,230,118,.15);color:var(–green)}
+.status-unpaid{background:rgba(232,53,69,.18);color:#e8192c}
+.status-paid{background:rgba(0,230,118,.15);color:#00e676}
 
 /* ── REORDER BADGES ── */
 .reorder-badge{display:inline-block;padding:3px 7px;border-radius:4px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-family:‘Share Tech Mono’,monospace}
-.reorder-ok{background:rgba(0,230,118,.12);color:var(–green)}
-.reorder-low{background:rgba(255,145,0,.15);color:var(–warn)}
-.reorder-alert{background:rgba(232,25,44,.15);color:var(–red)}
-.supplier-group{background:var(–surf1);border:1px solid var(–border);border-radius:10px;padding:12px;margin-bottom:12px}
-.supplier-group-header{font-family:‘Orbitron’,monospace;font-size:9px;font-weight:700;color:var(–red);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(–border)}
-.location-chip{display:inline-flex;align-items:center;gap:4px;background:rgba(232,25,44,.1);color:var(–red);border:1px solid rgba(232,25,44,.25);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:600;margin:4px}
+.reorder-ok{background:rgba(0,230,118,.12);color:#00e676}
+.reorder-low{background:rgba(255,145,0,.15);color:#ff9100}
+.reorder-alert{background:rgba(232,25,44,.15);color:#e8192c}
+.supplier-group{background:#07070f;border:1px solid #1e1e3a;border-radius:10px;padding:12px;margin-bottom:12px}
+.supplier-group-header{font-family:‘Orbitron’,monospace;font-size:9px;font-weight:700;color:#e8192c;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #1e1e3a}
+.location-chip{display:inline-flex;align-items:center;gap:4px;background:rgba(232,25,44,.1);color:#e8192c;border:1px solid rgba(232,25,44,.25);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:600;margin:4px}
 .location-chip-del{background:none;border:none;color:rgba(232,25,44,.6);cursor:pointer;font-size:14px;padding:0;line-height:1}
 .part-photo-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.part-photo-thumb{width:56px;height:56px;object-fit:cover;border-radius:6px;border:1px solid var(–border);cursor:pointer;transition:transform .15s}
+.part-photo-thumb{width:56px;height:56px;object-fit:cover;border-radius:6px;border:1px solid #1e1e3a;cursor:pointer;transition:transform .15s}
 .part-photo-thumb:active{transform:scale(.95)}
 
 /* ── EMPTY STATES ── */
-.empty{text-align:center;padding:40px 16px;color:var(–text3)}
+.empty{text-align:center;padding:40px 16px;color:#3a3860}
 .empty-icon{font-size:48px;margin-bottom:12px;opacity:.5}
 
 /* ── PHOTO ── */
 .photo-upload-zone{
-border:2px dashed var(–border2);border-radius:10px;
+border:2px dashed #2e2e5a;border-radius:10px;
 padding:24px 16px;text-align:center;
-background:var(–surf1);cursor:pointer;transition:all .2s;margin-bottom:10px;
+background:#07070f;cursor:pointer;transition:all .2s;margin-bottom:10px;
 }
-.photo-upload-zone:hover,.photo-upload-zone.dragover{border-color:var(–red);background:rgba(232,25,44,.05)}
+.photo-upload-zone:hover,.photo-upload-zone.dragover{border-color:#e8192c;background:rgba(232,25,44,.05)}
 .photo-upload-icon{font-size:36px;margin-bottom:8px}
-.photo-upload-text{font-size:12px;color:var(–text2);font-weight:600}
-.photo-upload-hint{font-size:10px;color:var(–text2);margin-top:4px;opacity:.55}
+.photo-upload-text{font-size:12px;color:#7a78a0;font-weight:600}
+.photo-upload-hint{font-size:10px;color:#7a78a0;margin-top:4px;opacity:.55}
 .photo-preview-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.photo-thumb-wrap{position:relative;width:72px;height:72px;border-radius:7px;overflow:hidden;border:1px solid var(–border)}
+.photo-thumb-wrap{position:relative;width:72px;height:72px;border-radius:7px;overflow:hidden;border:1px solid #1e1e3a}
 .photo-thumb-wrap img{width:100%;height:100%;object-fit:cover;display:block}
 .photo-thumb-remove{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.75);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.photo-record{background:var(–surf1);border:1px solid var(–border);border-radius:10px;padding:12px;margin-bottom:10px}
-.photo-record-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(–border)}
-.photo-record-title{font-family:‘Orbitron’,monospace;font-weight:700;font-size:11px;color:var(–red);letter-spacing:.5px}
-.photo-record-date{font-family:‘Share Tech Mono’,monospace;font-size:9px;color:var(–text2)}
-.photo-record-field{font-size:11px;color:var(–text2);margin-bottom:3px}
-.photo-record-field span{color:var(–text);font-weight:600}
+.photo-record{background:#07070f;border:1px solid #1e1e3a;border-radius:10px;padding:12px;margin-bottom:10px}
+.photo-record-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #1e1e3a}
+.photo-record-title{font-family:‘Orbitron’,monospace;font-weight:700;font-size:11px;color:#e8192c;letter-spacing:.5px}
+.photo-record-date{font-family:‘Share Tech Mono’,monospace;font-size:9px;color:#7a78a0}
+.photo-record-field{font-size:11px;color:#7a78a0;margin-bottom:3px}
+.photo-record-field span{color:#e8e6f8;font-weight:600}
 .photo-gallery{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.photo-gallery img{width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid var(–border);cursor:pointer;transition:transform .15s}
+.photo-gallery img{width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #1e1e3a;cursor:pointer;transition:transform .15s}
 .photo-gallery img:active{transform:scale(.95)}
 .photo-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px}
 .photo-lightbox img{max-width:100%;max-height:90vh;border-radius:8px;object-fit:contain}
-.photo-lightbox-close{position:fixed;top:14px;right:14px;background:var(–surf3);border:1px solid var(–border2);color:#fff;width:38px;height:38px;border-radius:50%;font-size:18px;cursor:pointer;z-index:2001;display:flex;align-items:center;justify-content:center}
+.photo-lightbox-close{position:fixed;top:14px;right:14px;background:#121224;border:1px solid #2e2e5a;color:#fff;width:38px;height:38px;border-radius:50%;font-size:18px;cursor:pointer;z-index:2001;display:flex;align-items:center;justify-content:center}
 
 /* ── TOTALS ── */
-.totals{background:linear-gradient(135deg,var(–surf1) 0%,rgba(232,25,44,.04) 100%);border:1px solid var(–border);border-radius:8px;padding:12px;margin:14px 0}
+.totals{background:linear-gradient(135deg,#07070f 0%,rgba(232,25,44,.04) 100%);border:1px solid #1e1e3a;border-radius:8px;padding:12px;margin:14px 0}
 .totals-row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px;margin-bottom:4px;font-family:‘Rajdhani’,sans-serif}
-.totals-row.total{font-family:‘Orbitron’,monospace;font-size:15px;color:var(–red);border-top:1px solid var(–border);padding-top:8px;margin-top:6px;font-weight:700}
+.totals-row.total{font-family:‘Orbitron’,monospace;font-size:15px;color:#e8192c;border-top:1px solid #1e1e3a;padding-top:8px;margin-top:6px;font-weight:700}
 
 /* ── LOGIN SCREEN ── */
 #login-screen {
@@ -506,13 +506,13 @@ font-family:‘Share Tech Mono’,monospace;font-size:9px;
 color:#3a3860;letter-spacing:1px;
 }
 .logout-btn {
-background:none;border:1px solid var(–border2);
+background:none;border:1px solid #2e2e5a;
 border-radius:6px;padding:4px 10px;
 font-family:‘Share Tech Mono’,monospace;font-size:9px;
-color:var(–text2);cursor:pointer;letter-spacing:1px;
+color:#7a78a0;cursor:pointer;letter-spacing:1px;
 transition:all .2s;
 }
-.logout-btn:hover{border-color:rgba(232,25,44,.4);color:var(–red)}
+.logout-btn:hover{border-color:rgba(232,25,44,.4);color:#e8192c}
 #login-screen.hidden{display:none !important;visibility:hidden !important;pointer-events:none !important}
 </style>
 
@@ -662,7 +662,7 @@ transition:all .2s;
   <div id="inv-tab-locations" style="display:none;">
     <div class="card" style="margin-bottom:12px;">
       <div class="card-header">📍 My Storage Locations</div>
-      <p style="font-size:11px;color:var(--text-secondary);margin-bottom:12px;">Create your own custom location names — shelves, bins, cabinets, drawers, anything.</p>
+      <p style="font-size:11px;color:#7a78a0;margin-bottom:12px;">Create your own custom location names — shelves, bins, cabinets, drawers, anything.</p>
       <div style="display:flex;gap:8px;margin-bottom:8px;">
         <input type="text" id="new-location-input" placeholder="e.g. Red Cabinet Top Shelf" style="flex:1;"/>
         <button class="btn btn-primary" style="width:auto;white-space:nowrap;padding:10px 14px;" onclick="addStorageLocation()">➕ Add</button>
@@ -677,7 +677,7 @@ transition:all .2s;
   <div id="inv-tab-reorder" style="display:none;">
     <div class="card" style="margin-bottom:12px;">
       <div class="card-header">🔄 Reorder List</div>
-      <p style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">Parts at or below their reorder threshold, grouped by supplier.</p>
+      <p style="font-size:11px;color:#7a78a0;margin-bottom:8px;">Parts at or below their reorder threshold, grouped by supplier.</p>
     </div>
     <div id="reorder-list">
       <div class="empty"><div class="empty-icon">🔄</div>No parts need reordering</div>
@@ -749,7 +749,7 @@ transition:all .2s;
 
   <!-- Saved records -->
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-    <div style="font-size:10px; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px; font-weight:700;">Saved Records</div>
+    <div style="font-size:10px; color:#7a78a0; text-transform:uppercase; letter-spacing:1px; font-weight:700;">Saved Records</div>
     <input type="text" id="photo-search" placeholder="Search..." style="width:140px; font-size:11px; padding:6px 8px;" oninput="renderPhotoRecords()"/>
   </div>
   <div id="photo-records-list">
@@ -947,10 +947,10 @@ function renderDashboard() {
   const html = recent.length === 0
     ? '<div class="empty"><div class="empty-icon">🛠️</div>No orders</div>'
     : recent.map(r => `
-      <div style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
-        <div style="font-weight: 600; font-size: 12px; color: var(--primary-red);">${r.roNumber}</div>
-        <div style="font-size: 11px; color: var(--text-secondary);">${r.customerName} • ${r.vehicle}</div>
-        <div style="font-size: 11px; color: var(--text-secondary);">$${r.total.toFixed(2)} • ${r.status}</div>
+      <div style="padding: 10px 0; border-bottom: 1px solid #1e1e3a;">
+        <div style="font-weight: 600; font-size: 12px; color: #e8192c;">${r.roNumber}</div>
+        <div style="font-size: 11px; color: #7a78a0;">${r.customerName} • ${r.vehicle}</div>
+        <div style="font-size: 11px; color: #7a78a0;">$${r.total.toFixed(2)} • ${r.status}</div>
       </div>
     `).join('');
   
@@ -1069,7 +1069,7 @@ if(q) list = list.filter(r => r.roNumber.toLowerCase().includes(q) || r.customer
 
 const html = list.length === 0
 ? ‘<div class="empty"><div class="empty-icon">🛠️</div>No repair orders</div>’
-: list.map(r => `<div class="card" onclick="viewRepairOrder('${r.id}')"> <div class="card-header">${r.roNumber}</div> <div style="font-weight: 600; font-size: 12px; margin-bottom: 4px;">${r.customerName}</div> <div style="font-size: 11px; color: var(--text-secondary); margin-bottom: 6px;">${r.vehicle}</div> <div style="display: flex; justify-content: space-between; font-size: 11px;"> <span style="color: var(--primary-red); font-weight: 600;">View Details</span> <span>${r.status}</span> </div> </div>`).join(’’);
+: list.map(r => `<div class="card" onclick="viewRepairOrder('${r.id}')"> <div class="card-header">${r.roNumber}</div> <div style="font-weight: 600; font-size: 12px; margin-bottom: 4px;">${r.customerName}</div> <div style="font-size: 11px; color: #7a78a0; margin-bottom: 6px;">${r.vehicle}</div> <div style="display: flex; justify-content: space-between; font-size: 11px;"> <span style="color: #e8192c; font-weight: 600;">View Details</span> <span>${r.status}</span> </div> </div>`).join(’’);
 
 document.getElementById(‘repair-orders-list’).innerHTML = html;
 }
@@ -1089,22 +1089,22 @@ const html = `
 ```
   <div class="card">
     <div style="font-weight: 600;">${ro.customerName}</div>
-    <div style="font-size: 11px; color: var(--text-secondary); margin-bottom: 8px;">📱 ${ro.phone}</div>
+    <div style="font-size: 11px; color: #7a78a0; margin-bottom: 8px;">📱 ${ro.phone}</div>
     <div style="font-size: 12px; margin-bottom: 4px;">${ro.vehicle}</div>
-    ${ro.vin ? `<div style="font-size: 11px; color: var(--text-secondary);">VIN: ${ro.vin}</div>` : ''}
-    ${ro.mileage ? `<div style="font-size: 11px; color: var(--text-secondary);">Mileage: ${ro.mileage}</div>` : ''}
+    ${ro.vin ? `<div style="font-size: 11px; color: #7a78a0;">VIN: ${ro.vin}</div>` : ''}
+    ${ro.mileage ? `<div style="font-size: 11px; color: #7a78a0;">Mileage: ${ro.mileage}</div>` : ''}
     ${ro.services&&ro.services.length ? `<div style="font-size:11px;margin-top:8px;"><strong>Services:</strong> ${ro.services.join(', ')}</div>` : ''}
-    ${ro.notes ? `<div style="font-size:11px;color:var(--text-secondary);margin-top:6px;">${ro.notes}</div>` : ''}
+    ${ro.notes ? `<div style="font-size:11px;color:#7a78a0;margin-top:6px;">${ro.notes}</div>` : ''}
   </div>
 
   ${linkedParts.length>0 ? `
     <div style="background:rgba(220,53,69,0.06);border:1px solid rgba(220,53,69,0.2);border-radius:8px;padding:12px;margin-bottom:12px;">
-      <div style="font-size:11px;font-weight:700;color:var(--primary-red);margin-bottom:8px;">📦 Linked Inventory Parts</div>
-      ${linkedParts.map(p=>`<div style="font-size:11px;padding:4px 0;border-bottom:1px solid var(--border-color);">${p.partNumber} — ${p.name} <span style="color:var(--text-secondary);">(Qty: ${p.qty})</span></div>`).join('')}
+      <div style="font-size:11px;font-weight:700;color:#e8192c;margin-bottom:8px;">📦 Linked Inventory Parts</div>
+      ${linkedParts.map(p=>`<div style="font-size:11px;padding:4px 0;border-bottom:1px solid #1e1e3a;">${p.partNumber} — ${p.name} <span style="color:#7a78a0;">(Qty: ${p.qty})</span></div>`).join('')}
     </div>` : ''}
 
   <div style="margin-bottom:12px;">
-    <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase;font-weight:700;margin-bottom:6px;">Status</div>
+    <div style="font-size:10px;color:#7a78a0;text-transform:uppercase;font-weight:700;margin-bottom:6px;">Status</div>
     <select id="ro-status-update" style="margin-bottom:8px;">
       ${['Open','In Progress','Waiting Parts','Complete'].map(s=>`<option ${ro.status===s?'selected':''}>${s}</option>`).join('')}
     </select>
@@ -1163,7 +1163,7 @@ if(q) list = list.filter(i => i.invNumber.toLowerCase().includes(q) || i.custome
 
 const html = list.length === 0
 ? ‘<div class="empty"><div class="empty-icon">🧾</div>Create invoices from repair orders</div>’
-: list.map(i => `<div class="card" onclick="viewInvoice('${i.id}')"> <div class="card-header">${i.invNumber}</div> <div style="font-weight: 600; font-size: 12px; margin-bottom: 4px;">${i.customerName}</div> <div style="font-size: 11px; color: var(--text-secondary); margin-bottom: 6px;">${i.vehicle}</div> <div style="display: flex; justify-content: space-between; font-size: 11px;"> <span style="color: var(--primary-red); font-weight: 600;">View</span> <span class="status-badge ${i.status === 'Paid' ? 'status-paid' : 'status-unpaid'}">${i.status}</span> </div> </div>`).join(’’);
+: list.map(i => `<div class="card" onclick="viewInvoice('${i.id}')"> <div class="card-header">${i.invNumber}</div> <div style="font-weight: 600; font-size: 12px; margin-bottom: 4px;">${i.customerName}</div> <div style="font-size: 11px; color: #7a78a0; margin-bottom: 6px;">${i.vehicle}</div> <div style="display: flex; justify-content: space-between; font-size: 11px;"> <span style="color: #e8192c; font-weight: 600;">View</span> <span class="status-badge ${i.status === 'Paid' ? 'status-paid' : 'status-unpaid'}">${i.status}</span> </div> </div>`).join(’’);
 
 document.getElementById(‘invoices-list’).innerHTML = html;
 }
@@ -1181,7 +1181,7 @@ const html = `
 ```
   <div class="card">
     <div style="font-weight: 600; margin-bottom: 4px;">${inv.customerName}</div>
-    <div style="font-size: 11px; color: var(--text-secondary);">📱 ${inv.phone}</div>
+    <div style="font-size: 11px; color: #7a78a0;">📱 ${inv.phone}</div>
     <div style="font-size: 12px; margin-top: 8px;">🚗 ${inv.vehicle}</div>
   </div>
   
@@ -1249,7 +1249,7 @@ return;
 // Show each location with how many parts use it
 el.innerHTML = locs.map(loc => {
 const count = (db.inventory||[]).filter(p => (p.locations||[]).includes(loc)).length;
-return `<div style="display:flex;align-items:center;justify-content:space-between;background:var(--surface-dark);border:1px solid var(--border-color);border-radius:8px;padding:12px;margin-bottom:8px;"> <div> <div style="font-weight:700;font-size:13px;">${loc}</div> <div style="font-size:11px;color:var(--text-secondary);margin-top:2px;">${count} part${count!==1?'s':''} stored here</div> </div> <div style="display:flex;gap:6px;align-items:center;"> <button class="btn btn-secondary btn-small" style="width:auto;margin:0;" onclick="viewLocationParts('${loc.replace(/'/g,"\\'")}')">View Parts</button> <button class="btn btn-secondary btn-small" style="width:auto;margin:0;color:var(--primary-red);" onclick="deleteStorageLocation('${loc.replace(/'/g,"\\'")}')">✕</button> </div> </div>`;
+return `<div style="display:flex;align-items:center;justify-content:space-between;background:#07070f;border:1px solid #1e1e3a;border-radius:8px;padding:12px;margin-bottom:8px;"> <div> <div style="font-weight:700;font-size:13px;">${loc}</div> <div style="font-size:11px;color:#7a78a0;margin-top:2px;">${count} part${count!==1?'s':''} stored here</div> </div> <div style="display:flex;gap:6px;align-items:center;"> <button class="btn btn-secondary btn-small" style="width:auto;margin:0;" onclick="viewLocationParts('${loc.replace(/'/g,"\\'")}')">View Parts</button> <button class="btn btn-secondary btn-small" style="width:auto;margin:0;color:#e8192c;" onclick="deleteStorageLocation('${loc.replace(/'/g,"\\'")}')">✕</button> </div> </div>`;
 }).join(’’);
 }
 
@@ -1261,12 +1261,12 @@ const html = `
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal" onclick="event.stopPropagation()">
       <div class="modal-header">📍 ${loc}</div>
-      <div style="font-size:11px;color:var(--text-secondary);margin-bottom:12px;">${parts.length} part${parts.length!==1?'s':''} in this location</div>
+      <div style="font-size:11px;color:#7a78a0;margin-bottom:12px;">${parts.length} part${parts.length!==1?'s':''} in this location</div>
       ${parts.length===0 ? '<div class="empty">No parts here yet</div>' : parts.map(p=>`
-        <div style="background:var(--surface-dark);border:1px solid var(--border-color);border-radius:8px;padding:10px;margin-bottom:8px;">
-          <div style="font-weight:700;color:var(--primary-red);font-size:12px;">${p.partNumber} — ${p.name}</div>
-          <div style="font-size:11px;color:var(--text-secondary);">Qty: ${p.qty} | Cost: $${(p.cost||0).toFixed(2)} | Price: $${(p.price||0).toFixed(2)}</div>
-          ${p.supplier ? `<div style="font-size:11px;color:var(--text-secondary);">Supplier: ${p.supplier}</div>` : ''}
+        <div style="background:#07070f;border:1px solid #1e1e3a;border-radius:8px;padding:10px;margin-bottom:8px;">
+          <div style="font-weight:700;color:#e8192c;font-size:12px;">${p.partNumber} — ${p.name}</div>
+          <div style="font-size:11px;color:#7a78a0;">Qty: ${p.qty} | Cost: $${(p.cost||0).toFixed(2)} | Price: $${(p.price||0).toFixed(2)}</div>
+          ${p.supplier ? `<div style="font-size:11px;color:#7a78a0;">Supplier: ${p.supplier}</div>` : ''}
         </div>`).join('')}
       <button class="btn btn-secondary" onclick="closeModal()">Close</button>
     </div>
@@ -1348,7 +1348,7 @@ const html = `
   </div>
 
   <div class="form-group" style="background:rgba(220,53,69,0.05);border:1px solid rgba(220,53,69,0.2);border-radius:8px;padding:12px;">
-    <label style="color:var(--primary-red);">🔄 Reorder Info</label>
+    <label style="color:#e8192c;">🔄 Reorder Info</label>
     <div class="form-group" style="margin-bottom:8px;">
       <label>Supplier / Vendor Name</label>
       <input type="text" id="part-supplier" placeholder="e.g. NAPA, Summit Racing, Local Supplier" value="${part&&part.supplier?part.supplier:''}"/>
@@ -1370,7 +1370,7 @@ const html = `
   <div class="form-group">
     <label>📍 Storage Locations</label>
     ${locs.length===0
-      ? `<div style="font-size:11px;color:var(--text-secondary);padding:8px;background:var(--surface-dark);border-radius:6px;">No locations yet — <button onclick="closeModal();switchTab('inventory',document.getElementById('inv-subtab-locations'));switchInvTab('locations',document.getElementById('inv-subtab-locations'))" style="background:none;border:none;color:var(--primary-red);cursor:pointer;font-size:11px;font-weight:700;">add locations first</button></div>`
+      ? `<div style="font-size:11px;color:#7a78a0;padding:8px;background:#07070f;border-radius:6px;">No locations yet — <button onclick="closeModal();switchTab('inventory',document.getElementById('inv-subtab-locations'));switchInvTab('locations',document.getElementById('inv-subtab-locations'))" style="background:none;border:none;color:#e8192c;cursor:pointer;font-size:11px;font-weight:700;">add locations first</button></div>`
       : `<div class="checkbox-group" id="location-checks">
           ${locs.map(l=>`<label class="checkbox-item"><input type="checkbox" class="location-check" value="${l}" ${part&&(part.locations||[]).includes(l)?'checked':''}/> ${l}</label>`).join('')}
         </div>`
@@ -1495,7 +1495,7 @@ const stockClass = p.qty===0 ? ‘reorder-alert’ : p.qty<=p.lowStock ? ‘reor
 const stockLabel = p.qty===0 ? ‘🔴 Out of Stock’ : p.qty<=p.lowStock ? ‘⚠️ Low Stock’ : ‘✅ In Stock’;
 const photoHtml = (p.photos||[]).length>0
 ? `<div class="part-photo-strip">${p.photos.map((src,i)=>`<img class="part-photo-thumb" src="${src}" onclick="openLightboxFromPart('${p.id}',${i})"/>`).join('')}</div>` : ‘’;
-return `<div class="inventory-item"> <div class="inventory-header"> <div style="flex:1;"> <div class="inventory-title">${p.partNumber} — ${p.name}</div> <div style="font-size:11px;color:var(--text-secondary);">${p.category}${p.client?' · 👤 '+p.client:''}</div> </div> <div style="text-align:right;"> <div class="qty-badge" style="font-size:14px;">${p.qty}</div> <div style="margin-top:4px;"><span class="reorder-badge ${stockClass}">${stockLabel}</span></div> </div> </div> ${(p.locations||[]).length>0 ?`<div style="margin:6px 0;">${p.locations.map(l=>`<span class="location-badge">📍 ${l}</span>`).join(’’)}</div>`: ''} <div class="inventory-detail">Cost: $${(p.cost||0).toFixed(2)} | Sell: $${(p.price||0).toFixed(2)}</div> ${p.supplier ?`<div class="inventory-detail">🏭 Supplier: <strong>${p.supplier}</strong>${p.supplierContact?’ · ‘+p.supplierContact:’’}</div>`: ''} ${p.supplierSku ?`<div class="inventory-detail">SKU: ${p.supplierSku}</div>`: ''} ${p.notes ?`<div class="inventory-detail" style="font-style:italic;color:var(--text-secondary);">${p.notes}</div>`: ''} ${photoHtml} <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;"> <button class="btn btn-secondary btn-small" style="width:auto;margin:0;" onclick="editInventoryItem('${p.id}')">✏️ Edit</button> <button class="btn btn-secondary btn-small" style="width:auto;margin:0;" onclick="quickAdjustQty('${p.id}')">± Qty</button> ${p.supplier ?`<button class="btn btn-secondary btn-small" style="width:auto;margin:0;color:var(--primary-red);" onclick="showReorderCard('${p.id}')">🔄 Reorder</button>` : ''} <button class="btn btn-secondary btn-small" style="width:auto;margin:0;color:#888;" onclick="deleteInventoryItem('${p.id}')">🗑</button> </div> </div>`;
+return `<div class="inventory-item"> <div class="inventory-header"> <div style="flex:1;"> <div class="inventory-title">${p.partNumber} — ${p.name}</div> <div style="font-size:11px;color:#7a78a0;">${p.category}${p.client?' · 👤 '+p.client:''}</div> </div> <div style="text-align:right;"> <div class="qty-badge" style="font-size:14px;">${p.qty}</div> <div style="margin-top:4px;"><span class="reorder-badge ${stockClass}">${stockLabel}</span></div> </div> </div> ${(p.locations||[]).length>0 ?`<div style="margin:6px 0;">${p.locations.map(l=>`<span class="location-badge">📍 ${l}</span>`).join(’’)}</div>`: ''} <div class="inventory-detail">Cost: $${(p.cost||0).toFixed(2)} | Sell: $${(p.price||0).toFixed(2)}</div> ${p.supplier ?`<div class="inventory-detail">🏭 Supplier: <strong>${p.supplier}</strong>${p.supplierContact?’ · ‘+p.supplierContact:’’}</div>`: ''} ${p.supplierSku ?`<div class="inventory-detail">SKU: ${p.supplierSku}</div>`: ''} ${p.notes ?`<div class="inventory-detail" style="font-style:italic;color:#7a78a0;">${p.notes}</div>`: ''} ${photoHtml} <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;"> <button class="btn btn-secondary btn-small" style="width:auto;margin:0;" onclick="editInventoryItem('${p.id}')">✏️ Edit</button> <button class="btn btn-secondary btn-small" style="width:auto;margin:0;" onclick="quickAdjustQty('${p.id}')">± Qty</button> ${p.supplier ?`<button class="btn btn-secondary btn-small" style="width:auto;margin:0;color:#e8192c;" onclick="showReorderCard('${p.id}')">🔄 Reorder</button>` : ''} <button class="btn btn-secondary btn-small" style="width:auto;margin:0;color:#888;" onclick="deleteInventoryItem('${p.id}')">🗑</button> </div> </div>`;
 }).join(’’);
 }
 
@@ -1535,12 +1535,12 @@ const html=`
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal" onclick="event.stopPropagation()">
       <div class="modal-header">🔄 Reorder — ${p.name}</div>
-      <div style="background:var(--surface-dark);border:1px solid var(--border-color);border-radius:8px;padding:14px;margin-bottom:14px;">
-        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:4px;">PART #</div>
+      <div style="background:#07070f;border:1px solid #1e1e3a;border-radius:8px;padding:14px;margin-bottom:14px;">
+        <div style="font-size:11px;color:#7a78a0;margin-bottom:4px;">PART #</div>
         <div style="font-weight:700;">${p.partNumber}</div>
       </div>
       <div style="background:rgba(220,53,69,0.06);border:1px solid rgba(220,53,69,0.25);border-radius:8px;padding:14px;margin-bottom:14px;">
-        <div style="font-size:12px;font-weight:700;color:var(--primary-red);margin-bottom:10px;">🏭 Supplier Info</div>
+        <div style="font-size:12px;font-weight:700;color:#e8192c;margin-bottom:10px;">🏭 Supplier Info</div>
         <div style="font-size:12px;margin-bottom:6px;"><strong>Supplier:</strong> ${p.supplier||'—'}</div>
         <div style="font-size:12px;margin-bottom:6px;"><strong>Contact:</strong> ${p.supplierContact||'—'}</div>
         <div style="font-size:12px;margin-bottom:6px;"><strong>Supplier SKU:</strong> ${p.supplierSku||'—'}</div>
@@ -1548,16 +1548,16 @@ const html=`
         <div style="font-size:12px;"><strong>Reorder Qty:</strong> ${p.reorderQty||1}</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
-        <div style="background:var(--surface-dark);border:1px solid var(--border-color);border-radius:8px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase;margin-bottom:4px;">Current Qty</div>
-          <div style="font-size:24px;font-weight:800;color:${p.qty===0?'var(--primary-red)':'#ffc107'};">${p.qty}</div>
+        <div style="background:#07070f;border:1px solid #1e1e3a;border-radius:8px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#7a78a0;text-transform:uppercase;margin-bottom:4px;">Current Qty</div>
+          <div style="font-size:24px;font-weight:800;color:${p.qty===0?'#e8192c':'#ffc107'};">${p.qty}</div>
         </div>
-        <div style="background:var(--surface-dark);border:1px solid var(--border-color);border-radius:8px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase;margin-bottom:4px;">Reorder Qty</div>
-          <div style="font-size:24px;font-weight:800;color:var(--primary-red);">${p.reorderQty||1}</div>
+        <div style="background:#07070f;border:1px solid #1e1e3a;border-radius:8px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#7a78a0;text-transform:uppercase;margin-bottom:4px;">Reorder Qty</div>
+          <div style="font-size:24px;font-weight:800;color:#e8192c;">${p.reorderQty||1}</div>
         </div>
       </div>
-      <div style="font-size:11px;color:var(--text-secondary);margin-bottom:14px;">Est. Reorder Cost: <strong style="color:var(--text-primary);">$${((p.cost||0)*(p.reorderQty||1)).toFixed(2)}</strong></div>
+      <div style="font-size:11px;color:#7a78a0;margin-bottom:14px;">Est. Reorder Cost: <strong style="color:#e8e6f8;">$${((p.cost||0)*(p.reorderQty||1)).toFixed(2)}</strong></div>
       <button class="btn btn-primary" onclick="markReordered('${partId}')">✅ Mark as Reordered</button>
       <button class="btn btn-secondary" onclick="closeModal()">Close</button>
     </div>
@@ -1589,12 +1589,12 @@ groups[sup].push(p);
 });
 
 el.innerHTML = Object.entries(groups).map(([sup, parts]) => ` <div class="supplier-group"> <div class="supplier-group-header">🏭 ${sup}</div> ${parts.map(p=>`
-<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-color);">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #1e1e3a;">
 <div style="flex:1;">
 <div style="font-size:12px;font-weight:700;">${p.name}</div>
-<div style="font-size:10px;color:var(--text-secondary);">${p.partNumber}${p.supplierSku?’ · SKU: ‘+p.supplierSku:’’}</div>
-${p.supplierContact?`<div style="font-size:10px;color:var(--text-secondary);">📞 ${p.supplierContact}</div>`:’’}
-${p.lastReordered?`<div style="font-size:10px;color:var(--success);">Last ordered: ${p.lastReordered}</div>`:’’}
+<div style="font-size:10px;color:#7a78a0;">${p.partNumber}${p.supplierSku?’ · SKU: ‘+p.supplierSku:’’}</div>
+${p.supplierContact?`<div style="font-size:10px;color:#7a78a0;">📞 ${p.supplierContact}</div>`:’’}
+${p.lastReordered?`<div style="font-size:10px;color:#00e676;">Last ordered: ${p.lastReordered}</div>`:’’}
 </div>
 <div style="text-align:right;flex-shrink:0;margin-left:10px;">
 <span class="reorder-badge ${p.qty===0?'reorder-alert':'reorder-low'}">${p.qty===0?‘OUT’:‘LOW: ‘+p.qty}</span>
@@ -1696,7 +1696,7 @@ const html = list.length === 0
 : list.map(c => {
 const orders = db.repairOrders.filter(r => r.customerId === c.id);
 const parts = (db.inventory||[]).filter(p => p.client === c.name);
-return `<div class="card" onclick="viewCustomer('${c.id}')"> <div class="card-header">${c.name}</div> <div style="font-size: 11px; margin-bottom: 4px;">📱 ${c.phone}</div> ${c.email ?`<div style="font-size: 11px; margin-bottom: 4px;">📧 ${c.email}</div>` : ''} <div style="display:flex;gap:10px;font-size:11px;color:var(--text-secondary);margin-top:4px;"> <span>🛠️ ${orders.length} order${orders.length!==1?'s':''}</span> <span>📦 ${parts.length} part${parts.length!==1?'s':''}</span> </div> </div>`;
+return `<div class="card" onclick="viewCustomer('${c.id}')"> <div class="card-header">${c.name}</div> <div style="font-size: 11px; margin-bottom: 4px;">📱 ${c.phone}</div> ${c.email ?`<div style="font-size: 11px; margin-bottom: 4px;">📧 ${c.email}</div>` : ''} <div style="display:flex;gap:10px;font-size:11px;color:#7a78a0;margin-top:4px;"> <span>🛠️ ${orders.length} order${orders.length!==1?'s':''}</span> <span>📦 ${parts.length} part${parts.length!==1?'s':''}</span> </div> </div>`;
 }).join(’’);
 
 document.getElementById(‘customers-list’).innerHTML = html;
@@ -1716,31 +1716,31 @@ const html=`
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal" onclick="event.stopPropagation()">
       <div class="modal-header">👤 ${c.name}</div>
-      <div style="background:var(--surface-dark);border:1px solid var(--border-color);border-radius:8px;padding:12px;margin-bottom:12px;">
+      <div style="background:#07070f;border:1px solid #1e1e3a;border-radius:8px;padding:12px;margin-bottom:12px;">
         <div style="font-size:12px;margin-bottom:4px;">📱 ${c.phone}</div>
         ${c.email?`<div style="font-size:12px;margin-bottom:4px;">📧 ${c.email}</div>`:''}
-        ${c.address?`<div style="font-size:12px;color:var(--text-secondary);">📍 ${c.address}</div>`:''}
+        ${c.address?`<div style="font-size:12px;color:#7a78a0;">📍 ${c.address}</div>`:''}
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
-        <div style="background:var(--surface-dark);border:1px solid var(--border-color);border-radius:8px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase;">Orders</div>
-          <div style="font-size:22px;font-weight:800;color:var(--primary-red);">${orders.length}</div>
+        <div style="background:#07070f;border:1px solid #1e1e3a;border-radius:8px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#7a78a0;text-transform:uppercase;">Orders</div>
+          <div style="font-size:22px;font-weight:800;color:#e8192c;">${orders.length}</div>
         </div>
-        <div style="background:var(--surface-dark);border:1px solid var(--border-color);border-radius:8px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase;">Parts</div>
-          <div style="font-size:22px;font-weight:800;color:var(--primary-red);">${parts.length}</div>
+        <div style="background:#07070f;border:1px solid #1e1e3a;border-radius:8px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#7a78a0;text-transform:uppercase;">Parts</div>
+          <div style="font-size:22px;font-weight:800;color:#e8192c;">${parts.length}</div>
         </div>
-        <div style="background:var(--surface-dark);border:1px solid var(--border-color);border-radius:8px;padding:10px;text-align:center;">
-          <div style="font-size:10px;color:var(--text-secondary);text-transform:uppercase;">Unpaid</div>
-          <div style="font-size:22px;font-weight:800;color:${unpaidTotal>0?'var(--primary-red)':'var(--success)'};">${unpaidTotal}</div>
+        <div style="background:#07070f;border:1px solid #1e1e3a;border-radius:8px;padding:10px;text-align:center;">
+          <div style="font-size:10px;color:#7a78a0;text-transform:uppercase;">Unpaid</div>
+          <div style="font-size:22px;font-weight:800;color:${unpaidTotal>0?'#e8192c':'#00e676'};">${unpaidTotal}</div>
         </div>
       </div>
       ${orders.length>0?`
-        <div style="font-size:11px;font-weight:700;color:var(--primary-red);text-transform:uppercase;margin-bottom:6px;">Recent Repair Orders</div>
-        ${orders.slice(-3).reverse().map(r=>`<div style="background:var(--surface-dark);border:1px solid var(--border-color);border-radius:6px;padding:8px;margin-bottom:6px;cursor:pointer;" onclick="closeModal();setTimeout(()=>viewRepairOrder('${r.id}'),100)"><span style="font-weight:700;font-size:12px;">${r.roNumber}</span> <span style="font-size:11px;color:var(--text-secondary);">${r.vehicle} · ${r.status}</span></div>`).join('')}`:''}
+        <div style="font-size:11px;font-weight:700;color:#e8192c;text-transform:uppercase;margin-bottom:6px;">Recent Repair Orders</div>
+        ${orders.slice(-3).reverse().map(r=>`<div style="background:#07070f;border:1px solid #1e1e3a;border-radius:6px;padding:8px;margin-bottom:6px;cursor:pointer;" onclick="closeModal();setTimeout(()=>viewRepairOrder('${r.id}'),100)"><span style="font-weight:700;font-size:12px;">${r.roNumber}</span> <span style="font-size:11px;color:#7a78a0;">${r.vehicle} · ${r.status}</span></div>`).join('')}`:''}
       ${parts.length>0?`
-        <div style="font-size:11px;font-weight:700;color:var(--primary-red);text-transform:uppercase;margin:10px 0 6px;">Inventory Parts</div>
-        ${parts.map(p=>`<div style="background:var(--surface-dark);border:1px solid var(--border-color);border-radius:6px;padding:8px;margin-bottom:6px;"><span style="font-weight:700;font-size:12px;">${p.partNumber} — ${p.name}</span><br/><span style="font-size:11px;color:var(--text-secondary);">Qty: ${p.qty} · ${(p.locations||[]).join(', ')||'No location'}</span></div>`).join('')}`:''}
+        <div style="font-size:11px;font-weight:700;color:#e8192c;text-transform:uppercase;margin:10px 0 6px;">Inventory Parts</div>
+        ${parts.map(p=>`<div style="background:#07070f;border:1px solid #1e1e3a;border-radius:6px;padding:8px;margin-bottom:6px;"><span style="font-weight:700;font-size:12px;">${p.partNumber} — ${p.name}</span><br/><span style="font-size:11px;color:#7a78a0;">Qty: ${p.qty} · ${(p.locations||[]).join(', ')||'No location'}</span></div>`).join('')}`:''}
       <button class="btn btn-secondary" style="margin-top:8px;" onclick="closeModal()">Close</button>
     </div>
   </div>`;
@@ -1830,7 +1830,7 @@ return;
 el.innerHTML = list.map(r => {
 const d = new Date(r.created);
 const dateStr = d.toLocaleDateString([], {month:‘short’, day:‘numeric’, year:‘numeric’}) + ’ · ’ + d.toLocaleTimeString([], {hour:‘2-digit’, minute:‘2-digit’});
-return `<div class="photo-record"> <div class="photo-record-meta"> <div> <div class="photo-record-title">${r.category}</div> ${r.ro ?`<div class="photo-record-field">RO: <span>${r.ro}</span></div>`: ''} ${r.vehicle ?`<div class="photo-record-field">Vehicle: <span>${r.vehicle}</span></div>`: ''} ${r.tech ?`<div class="photo-record-field">By: <span>${r.tech}</span></div>`: ''} </div> <div style="text-align:right;"> <div class="photo-record-date">${dateStr}</div> <div style="margin-top:6px;"> <button class="btn btn-secondary btn-small" style="width:auto;margin:0;" onclick="deletePhotoRecord('${r.id}')">🗑 Delete</button> </div> </div> </div> ${r.notes ?`<div class="photo-record-field" style="margin-bottom:8px;font-style:italic;">”${r.notes}”</div>`: ''} <div class="photo-gallery"> ${r.photos.map((src, i) =>`<img src="${src}" onclick="openLightbox('${r.id}',${i})" alt="photo"/>`).join('')} </div> <div style="font-size:10px;color:var(--text-secondary);margin-top:6px;">${r.photos.length} photo${r.photos.length!==1?'s':''}</div> </div> `;
+return `<div class="photo-record"> <div class="photo-record-meta"> <div> <div class="photo-record-title">${r.category}</div> ${r.ro ?`<div class="photo-record-field">RO: <span>${r.ro}</span></div>`: ''} ${r.vehicle ?`<div class="photo-record-field">Vehicle: <span>${r.vehicle}</span></div>`: ''} ${r.tech ?`<div class="photo-record-field">By: <span>${r.tech}</span></div>`: ''} </div> <div style="text-align:right;"> <div class="photo-record-date">${dateStr}</div> <div style="margin-top:6px;"> <button class="btn btn-secondary btn-small" style="width:auto;margin:0;" onclick="deletePhotoRecord('${r.id}')">🗑 Delete</button> </div> </div> </div> ${r.notes ?`<div class="photo-record-field" style="margin-bottom:8px;font-style:italic;">”${r.notes}”</div>`: ''} <div class="photo-gallery"> ${r.photos.map((src, i) =>`<img src="${src}" onclick="openLightbox('${r.id}',${i})" alt="photo"/>`).join('')} </div> <div style="font-size:10px;color:#7a78a0;margin-top:6px;">${r.photos.length} photo${r.photos.length!==1?'s':''}</div> </div> `;
 }).join(’’);
 }
 
