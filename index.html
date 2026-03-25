@@ -756,6 +756,107 @@ transition:all .2s;
 
 <div id="modal-container"></div>
 
+<!-- ── AUTH SYSTEM (isolated script — runs independently of app) ── -->
+
+<script>
+(function() {
+  var USERS = [
+    { username: 'owner',   password: 'falcon2024',  display: 'Owner'   },
+    { username: 'partner', password: 'falcon2024b', display: 'Partner' }
+  ];
+  var AUTH_KEY = 'falcon_auth_v1';
+
+  function checkAuth() {
+    var raw = localStorage.getItem(AUTH_KEY) || sessionStorage.getItem(AUTH_KEY);
+    if (raw) {
+      try {
+        var d = JSON.parse(raw);
+        if (d && d.loggedIn && d.username) { showApp(d.username); return; }
+      } catch(e) {}
+    }
+    var ls = document.getElementById('login-screen');
+    ls.style.display = 'flex';
+  }
+
+  function showApp(username) {
+    var ls  = document.getElementById('login-screen');
+    var app = document.getElementById('app');
+    ls.style.display  = 'none';
+    app.style.display = 'flex';
+    var user = null;
+    for (var i = 0; i < USERS.length; i++) {
+      if (USERS[i].username === username) { user = USERS[i]; break; }
+    }
+    var vEl = document.querySelector('.header-version');
+    if (vEl && user) vEl.textContent = '👤 ' + user.display.toUpperCase();
+    // Init app data
+    if (typeof loadData  === 'function') loadData();
+    if (typeof renderDashboard === 'function') renderDashboard();
+  }
+
+  window.attemptLogin = function() {
+    var u       = (document.getElementById('login-user').value || '').trim().toLowerCase();
+    var p       = (document.getElementById('login-pass').value || '');
+    var remember = document.getElementById('login-remember').checked;
+    var errEl   = document.getElementById('login-error');
+    var match   = null;
+
+    for (var i = 0; i < USERS.length; i++) {
+      if (USERS[i].username === u && USERS[i].password === p) { match = USERS[i]; break; }
+    }
+
+    if (!match) {
+      errEl.style.display = 'block';
+      document.getElementById('login-pass').value = '';
+      document.getElementById('login-pass').focus();
+      var box = document.querySelector('.login-box');
+      var offsets = [-10, 10, -7, 7, -4, 4, 0];
+      offsets.forEach(function(x, i) {
+        setTimeout(function() { box.style.transform = 'translateX(' + x + 'px)'; }, i * 60);
+      });
+      return;
+    }
+
+    errEl.style.display = 'none';
+    var session = JSON.stringify({ loggedIn: true, username: match.username, display: match.display });
+    if (remember) {
+      localStorage.setItem(AUTH_KEY, session);
+      sessionStorage.removeItem(AUTH_KEY);
+    } else {
+      sessionStorage.setItem(AUTH_KEY, session);
+      localStorage.removeItem(AUTH_KEY);
+    }
+    showApp(match.username);
+  };
+
+  window.logOut = function() {
+    if (!confirm('Sign out of Falcon Shop Manager?')) return;
+    localStorage.removeItem(AUTH_KEY);
+    sessionStorage.removeItem(AUTH_KEY);
+    document.getElementById('login-user').value = '';
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-error').style.display = 'none';
+    var vEl = document.querySelector('.header-version');
+    if (vEl) vEl.textContent = 'SYS v3.0';
+    document.getElementById('app').style.display = 'none';
+    var ls = document.getElementById('login-screen');
+    ls.style.display = 'flex';
+    document.getElementById('login-user').focus();
+  };
+
+  // Enter key support
+  document.getElementById('login-user').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') document.getElementById('login-pass').focus();
+  });
+  document.getElementById('login-pass').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') window.attemptLogin();
+  });
+
+  // Run on load
+  checkAuth();
+})();
+</script>
+
 <script>
 const DB_KEY = 'falcon_complete_v3';
 
@@ -1766,90 +1867,6 @@ zone.addEventListener(‘dragover’, function(e){ e.preventDefault(); zone.clas
 zone.addEventListener(‘dragleave’, function(){ zone.classList.remove(‘dragover’); });
 zone.addEventListener(‘drop’, function(e){ e.preventDefault(); zone.classList.remove(‘dragover’); handlePhotoFiles(e.dataTransfer.files); });
 });
-
-// ── AUTH SYSTEM ─────────────────────────────────────────────────────
-// Two private accounts. Change username/password to whatever you like.
-var USERS = [
-{ username: ‘owner’,   password: ‘falcon2024’,  display: ‘Owner’   },
-{ username: ‘partner’, password: ‘falcon2024b’, display: ‘Partner’ }
-];
-var AUTH_KEY = ‘falcon_auth_v1’;
-
-// Logo is embedded directly in login screen img tag
-
-// App is hidden by CSS (#app { display:none }) until auth passes
-
-function checkAuth() {
-var raw = localStorage.getItem(AUTH_KEY) || sessionStorage.getItem(AUTH_KEY);
-if(raw) {
-try {
-var d = JSON.parse(raw);
-if(d && d.loggedIn && d.username) { showApp(d.username); return; }
-} catch(e) {}
-}
-var ls = document.getElementById(‘login-screen’);
-ls.style.display = ‘flex’;
-ls.classList.remove(‘hidden’);
-}
-
-function attemptLogin() {
-var u = (document.getElementById(‘login-user’).value||’’).trim().toLowerCase();
-var p = document.getElementById(‘login-pass’).value||’’;
-var remember = document.getElementById(‘login-remember’).checked;
-var errEl = document.getElementById(‘login-error’);
-var match = null;
-for(var i=0;i<USERS.length;i++){ if(USERS[i].username===u && USERS[i].password===p){ match=USERS[i]; break; } }
-
-if(!match) {
-errEl.classList.add(‘show’);
-document.getElementById(‘login-pass’).value = ‘’;
-document.getElementById(‘login-pass’).focus();
-var box = document.querySelector(’.login-box’);
-var shakes = [-9,9,-6,6,-3,3,0];
-shakes.forEach(function(x,i){ setTimeout(function(){ box.style.transform=‘translateX(’+x+‘px)’; }, i*65); });
-return;
-}
-
-errEl.classList.remove(‘show’);
-var session = JSON.stringify({ loggedIn:true, username:match.username, display:match.display });
-if(remember) { localStorage.setItem(AUTH_KEY, session); sessionStorage.removeItem(AUTH_KEY); }
-else         { sessionStorage.setItem(AUTH_KEY, session); localStorage.removeItem(AUTH_KEY); }
-showApp(match.username);
-}
-
-function showApp(username) {
-var ls = document.getElementById(‘login-screen’);
-var app = document.getElementById(‘app’);
-ls.classList.add(‘hidden’);
-ls.style.display = ‘none’;
-app.style.display = ‘flex’;
-var user = null;
-for(var i=0;i<USERS.length;i++){ if(USERS[i].username===username){ user=USERS[i]; break; } }
-var vEl = document.querySelector(’.header-version’);
-if(vEl && user) vEl.textContent = ’👤 ’ + user.display.toUpperCase();
-loadData();
-renderDashboard();
-}
-
-function logOut() {
-if(!confirm(‘Sign out of Falcon Shop Manager?’)) return;
-localStorage.removeItem(AUTH_KEY);
-sessionStorage.removeItem(AUTH_KEY);
-document.getElementById(‘login-user’).value = ‘’;
-document.getElementById(‘login-pass’).value = ‘’;
-document.getElementById(‘login-error’).classList.remove(‘show’);
-var vEl = document.querySelector(’.header-version’);
-if(vEl) vEl.textContent = ‘SYS v3.0’;
-document.getElementById(‘app’).style.display = ‘none’;
-var ls = document.getElementById(‘login-screen’);
-ls.style.display = ‘flex’;
-ls.classList.remove(‘hidden’);
-}
-
-document.getElementById(‘login-pass’).addEventListener(‘keypress’, function(e){ if(e.key===‘Enter’) attemptLogin(); });
-document.getElementById(‘login-user’).addEventListener(‘keypress’, function(e){ if(e.key===‘Enter’) document.getElementById(‘login-pass’).focus(); });
-
-checkAuth();
 </script>
 
 </body>
