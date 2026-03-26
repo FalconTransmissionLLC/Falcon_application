@@ -33,18 +33,13 @@
 @keyframes pulse     { 0%,100%{opacity:1} 50%{opacity:.35} }
 @keyframes glow-r    { 0%,100%{box-shadow:0 0 8px rgba(232,25,44,0.65)} 50%{box-shadow:0 0 22px rgba(232,25,44,0.65),0 0 44px rgba(232,25,44,.25)} }
 @keyframes slideUp   { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
-@keyframes sweep     { 0%{left:-100%} 100%{left:200%} }
-@keyframes gridMove  { from{background-position:0 0} to{background-position:40px 40px} }
-@keyframes scanline  { 0%{transform:translateY(-2px)} 100%{transform:translateY(100vh)} }
+@keyframes sweep     { 0%{left:-100%} 100%{left:200%} } to{background-position:40px 40px} } 100%{transform:translateY(100vh)} }
 @keyframes float     { 0%,100%{filter:drop-shadow(0 0 12px rgba(232,25,44,.7)) drop-shadow(0 0 30px rgba(232,25,44,.2))} 50%{filter:drop-shadow(0 0 22px rgba(232,25,44,1)) drop-shadow(0 0 50px rgba(232,25,44,.4))} }
 
 *{box-sizing:border-box;margin:0;padding:0}
 button,a,[onclick]{
 cursor:pointer;
 touch-action:manipulation;
--webkit-tap-highlight-color:rgba(232,25,44,0.15);
-user-select:none;
--webkit-user-select:none;
 }
 
 html,body{
@@ -56,17 +51,7 @@ overflow:hidden;
 }
 
 /* Grid background — on #app not body, safer for iOS */
-body::before{ content:none; }
-body::after{ content:none; }
-#app::before{
-content:’’;
-position:absolute;inset:0;pointer-events:none;z-index:0;
-background-image:
-linear-gradient(rgba(232,25,44,.04) 1px, transparent 1px),
-linear-gradient(90deg, rgba(232,25,44,.04) 1px, transparent 1px);
-background-size:40px 40px;
-animation:gridMove 8s linear infinite;
-}
+/* grid animation removed - caused iOS tap blocking */
 
 /* App hidden by default — auth script sets display:flex on login success */
 #app{
@@ -93,12 +78,12 @@ position:relative;
 content:’’;position:absolute;top:0;left:-100%;width:50%;height:100%;
 background:linear-gradient(90deg,transparent,rgba(232,25,44,.07),transparent);
 animation:sweep 5s ease-in-out infinite;
-}
+pointer-events:none;}
 .header::after{
 content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;
 background:linear-gradient(90deg,transparent,rgba(232,25,44,.3) 20%,#e8192c 50%,rgba(232,25,44,.3) 80%,transparent);
 box-shadow:0 0 18px rgba(232,25,44,.8),0 0 40px rgba(232,25,44,.3);
-}
+pointer-events:none;}
 .header-logo{display:flex;align-items:center;gap:14px;flex:1}
 .logo-img{
 width:66px;height:66px;object-fit:contain;flex-shrink:0;
@@ -175,7 +160,7 @@ transition:all .2s;position:relative;
 .card::before{
 content:’’;position:absolute;top:0;left:0;right:0;height:1px;
 background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);
-}
+pointer-events:none;}
 .card:active{border-color:rgba(232,25,44,.4);box-shadow:0 0 14px rgba(232,25,44,.1)}
 .card-header{
 font-family:‘Orbitron’,monospace;
@@ -193,7 +178,7 @@ position:relative;
 .stat-box::after{
 content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;
 background:linear-gradient(90deg,transparent,rgba(232,25,44,.3),transparent);
-}
+pointer-events:none;}
 .stat-label{
 font-family:‘Share Tech Mono’,monospace;
 font-size:9px;color:#7a78a0;text-transform:uppercase;
@@ -226,7 +211,7 @@ box-shadow:0 4px 16px rgba(232,25,44,.4),0 0 0 1px rgba(232,25,44,.3);
 content:’’;position:absolute;top:0;left:-100%;width:100%;height:100%;
 background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);
 transition:left .3s;
-}
+pointer-events:none;}
 .btn-primary:hover::before{left:100%}
 .btn-primary:active{transform:scale(.98);box-shadow:0 2px 8px rgba(232,25,44,.3)}
 .btn-secondary{
