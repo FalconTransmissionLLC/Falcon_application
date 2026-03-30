@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Falcon Transmission - Professional Shop Management & Quoting System">
-    <meta name="theme-color" content="#111827">
+    <meta name="theme-color" content="#0f0f0f">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Falcon TX">
-    <meta property="og:title" content="Falcon Transmission Shop Manager">
-    <meta property="og:description" content="Professional transmission shop management and quoting system">
-    <meta property="og:type" content="web application">
     <title>Falcon Transmission - Shop Manager</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700;900&family=Poppins:wght@700;800;900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -23,16 +22,21 @@
         html, body {
             height: 100%;
             width: 100%;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(180deg, #111827 0%, #1f2937 50%, #111827 100%);
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
             color: #fff;
-            line-height: 1.5;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
         body {
             -webkit-user-select: none;
             user-select: none;
+        }
+
+        body.light-mode {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #f5f5f5 100%);
+            color: #333;
         }
 
         input, select, textarea, button {
@@ -52,12 +56,36 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #1f2937;
+            background: #1a1a1a;
+        }
+
+        body.light-mode ::-webkit-scrollbar-track {
+            background: #e8e8e8;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #FF6B35;
+            background: linear-gradient(180deg, #DC143C 0%, #FF1744 100%);
             border-radius: 4px;
+        }
+
+        :root {
+            --primary: #DC143C;
+            --primary-dark: #B20530;
+            --primary-light: #FF1744;
+            --accent: #C0C0C0;
+            --dark: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --border: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+
+        body.light-mode {
+            --dark: #f5f5f5;
+            --card-bg: #ffffff;
+            --border: #e0e0e0;
+            --text-primary: #333333;
+            --text-secondary: #666666;
         }
 
         .container {
@@ -66,72 +94,145 @@
             padding: 0 1rem;
         }
 
+        .logo-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem 0;
+        }
+
+        .logo-img {
+            max-width: 180px;
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 20px rgba(220, 20, 60, 0.3));
+        }
+
+        body.light-mode .logo-img {
+            filter: drop-shadow(0 0 20px rgba(220, 20, 60, 0.2));
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #DC143C 0%, #FF1744 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--card-bg) 0%, #252525 100%);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+        }
+
         .btn {
-            padding: 0.75rem 1rem;
+            padding: 0.875rem 1.25rem;
             border: none;
-            border-radius: 0.5rem;
+            border-radius: 0.625rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             font-size: 1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #FF6B35 0%, #FF5722 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #FF7A4A 0%, #FF6A35 100%);
-            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(220, 20, 60, 0.5);
+            transform: translateY(-2px);
         }
 
         .btn-secondary {
-            background: #4b5563;
+            background: var(--card-bg);
             color: white;
-            border: 1px solid #6b7785;
+            border: 2px solid var(--border);
+        }
+
+        body.light-mode .btn-secondary {
+            color: #333;
         }
 
         .btn-secondary:hover {
-            background: #5b6573;
-            border-color: #FF6B35;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.2);
         }
 
         .btn-success {
-            background: #10b981;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
 
         .btn-success:hover {
-            background: #059669;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+            transform: translateY(-2px);
         }
 
         .btn-danger {
-            background: #ef4444;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
         }
 
         .btn-danger:hover {
-            background: #dc2626;
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.5);
+            transform: translateY(-2px);
         }
 
         .input-field {
-            background: #374151;
-            border: 1px solid #4b5563;
-            color: white;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.875rem 1rem;
+            border-radius: 0.625rem;
             width: 100%;
-            transition: border-color 0.2s ease;
+            transition: all 0.3s ease;
+            font-size: 1rem;
         }
 
         .input-field:focus {
             outline: none;
-            border-color: #FF6B35;
-            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-secondary);
         }
 
         select.input-field {
@@ -140,97 +241,94 @@
 
         .icon-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 1.25rem;
             margin-bottom: 2rem;
         }
 
         @media (min-width: 640px) {
             .icon-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                grid-template-columns: repeat(4, 1fr);
                 gap: 1.5rem;
             }
         }
 
-        @media (min-width: 768px) {
-            .icon-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
         .icon-btn {
-            background: #374151;
-            border: 2px solid #4b5563;
-            border-radius: 1rem;
-            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--card-bg) 0%, #252525 100%);
+            border: 2px solid var(--border);
+            border-radius: 1.25rem;
+            padding: 1.75rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             color: white;
             text-decoration: none;
             aspect-ratio: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.light-mode .icon-btn {
+            color: #333;
+        }
+
+        .icon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .icon-btn:hover::before {
+            left: 100%;
         }
 
         .icon-btn:hover {
-            border-color: #FF6B35;
-            background: #4b5563;
-            transform: scale(1.05);
-        }
-
-        .icon-btn.highlight {
-            background: linear-gradient(135deg, #FF6B35 0%, #FF5722 100%);
-            border-color: #FFB347;
-        }
-
-        .icon-btn.highlight:hover {
-            background: linear-gradient(135deg, #FF7A4A 0%, #FF6A35 100%);
+            border-color: var(--primary);
+            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.3);
+            transform: translateY(-4px);
         }
 
         .icon-btn-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        @media (min-width: 640px) {
-            .icon-btn-icon {
-                font-size: 2.5rem;
-            }
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .icon-btn-label {
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
             text-align: center;
-            line-height: 1.2;
-        }
-
-        @media (min-width: 640px) {
-            .icon-btn-label {
-                font-size: 0.875rem;
-            }
+            line-height: 1.3;
+            letter-spacing: 0.3px;
         }
 
         .card {
-            background: #374151;
-            border: 1px solid #4b5563;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: border-color 0.2s ease;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
         }
 
         .card:hover {
-            border-color: #FF6B35;
+            border-color: var(--primary);
+            box-shadow: 0 8px 25px rgba(220, 20, 60, 0.1);
         }
 
         .card-title {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: #fff;
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
         }
 
         .modal-overlay {
@@ -239,7 +337,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -248,57 +346,60 @@
         }
 
         .modal {
-            background: #1f2937;
-            border: 2px solid #FF6B35;
-            border-radius: 1rem;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            border-radius: 1.5rem;
             max-width: 600px;
             width: 100%;
             max-height: 90vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(220, 20, 60, 0.3);
         }
 
         .modal-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1.5rem;
-            border-bottom: 1px solid #4b5563;
+            padding: 1.75rem;
+            border-bottom: 2px solid var(--border);
         }
 
         .modal-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
+            font-family: 'Poppins', sans-serif;
         }
 
         .modal-close {
             background: none;
             border: none;
-            color: #9ca3af;
+            color: var(--text-secondary);
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             padding: 0;
-            width: 2rem;
-            height: 2rem;
+            width: 2.5rem;
+            height: 2.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s ease;
         }
 
         .modal-close:hover {
-            color: #FF6B35;
+            color: var(--primary);
+            transform: rotate(90deg);
         }
 
         .modal-body {
             flex: 1;
             overflow-y: auto;
-            padding: 1.5rem;
+            padding: 1.75rem;
         }
 
         .modal-footer {
-            padding: 1.5rem;
-            border-top: 1px solid #4b5563;
+            padding: 1.75rem;
+            border-top: 2px solid var(--border);
             display: flex;
             gap: 1rem;
         }
@@ -338,113 +439,118 @@
         }
 
         .back-btn {
-            color: #FF6B35;
+            color: var(--primary);
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             cursor: pointer;
             border: none;
             background: none;
             font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         .back-btn:hover {
-            color: #FFB347;
-        }
-
-        .section {
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #fff;
+            color: var(--primary-light);
+            transform: translateX(-4px);
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
             gap: 0.375rem;
-            padding: 0.375rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
         .badge-success {
-            background: #10b981;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
         }
 
         .badge-warning {
-            background: #f59e0b;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: white;
         }
 
         .badge-danger {
-            background: #ef4444;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: white;
         }
 
         .price {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #FF6B35;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
         }
 
         .total-line {
             display: flex;
             justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #4b5563;
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--border);
+            font-size: 1.1rem;
         }
 
         .total-line.final {
-            border-bottom: 2px solid #FF6B35;
-            font-size: 1.25rem;
-            font-weight: 700;
-            padding-top: 1rem;
+            border-bottom: 3px solid var(--primary);
+            font-size: 1.4rem;
+            font-weight: 800;
+            padding-top: 1.25rem;
+            margin-top: 1rem;
+            color: var(--primary);
         }
 
         .time-display {
-            background: rgba(75, 85, 99, 0.5);
-            border: 1px solid #4b5563;
-            border-radius: 0.5rem;
-            padding: 1rem;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1) 0%, rgba(220, 20, 60, 0.05) 100%);
+            border: 2px solid var(--primary);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
             text-align: center;
             font-family: 'Courier New', monospace;
-            color: #d1d5db;
-            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .quote-item {
-            background: #4b5563;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #252525 0%, #2a2a2a 100%);
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .quote-item {
+            background: linear-gradient(135deg, #f9f9f9 0%, #f5f5f5 100%);
+        }
+
+        .quote-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.1);
         }
 
         .quote-item-info h4 {
-            margin-bottom: 0.25rem;
-            color: #fff;
-            font-weight: 600;
+            margin-bottom: 0.375rem;
+            color: var(--text-primary);
+            font-weight: 700;
         }
 
         .quote-item-info p {
-            color: #d1d5db;
-            font-size: 0.875rem;
-        }
-
-        .quote-item-action {
-            flex-shrink: 0;
-            margin-left: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
         .hidden {
@@ -456,57 +562,22 @@
         }
 
         .text-gray-400 {
-            color: #9ca3af;
+            color: var(--text-secondary);
         }
 
-        .text-orange {
-            color: #FF6B35;
-        }
-
-        .mb-1 { margin-bottom: 0.25rem; }
+        .mb-0 { margin-bottom: 0; }
         .mb-2 { margin-bottom: 0.5rem; }
         .mb-4 { margin-bottom: 1rem; }
-        .mb-6 { margin-bottom: 1.5rem; }
-
         .mt-2 { margin-top: 0.5rem; }
         .mt-4 { margin-top: 1rem; }
-        .mt-6 { margin-top: 1.5rem; }
 
         .page {
             min-height: 100vh;
-            background: linear-gradient(180deg, #111827 0%, #1f2937 50%, #111827 100%);
-            padding: 1rem;
-        }
-
-        @media (min-width: 640px) {
-            .page {
-                padding: 1.5rem;
-            }
+            padding: 1.5rem;
         }
 
         .home-header {
-            margin-bottom: 2rem;
-        }
-
-        .home-title {
-            font-size: 2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #FFB347 0%, #FF6B35 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        @media (min-width: 640px) {
-            .home-title {
-                font-size: 2.25rem;
-            }
-        }
-
-        .home-subtitle {
-            color: #9ca3af;
-            font-size: 0.875rem;
+            margin-bottom: 2.5rem;
         }
 
         @media print {
@@ -518,19 +589,57 @@
                 background: white;
                 padding: 0;
             }
-            .no-print, .back-btn, button, .modal-overlay {
+            .no-print, .back-btn, button, .modal-overlay, .theme-toggle, .logo-header {
                 display: none !important;
             }
             .card {
                 page-break-inside: avoid;
+                border: 1px solid #ccc;
             }
         }
     </style>
 </head>
 <body>
+    <div class="theme-toggle no-print" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        <span id="themeIcon">🌙</span>
+    </div>
     <div id="root"></div>
 
     <script>
+        // ==================== THEME MANAGEMENT ====================
+        function toggleTheme() {
+            const isDarkMode = document.body.classList.contains('light-mode');
+            if (isDarkMode) {
+                document.body.classList.remove('light-mode');
+                document.getElementById('themeIcon').textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeIcon').textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            document.getElementById('themeIcon').textContent = '☀️';
+        }
+
+        // ==================== LOCAL STORAGE ====================
+        function saveQuotes() {
+            localStorage.setItem('falconQuotes', JSON.stringify(appState.quotes));
+        }
+
+        function loadQuotes() {
+            const saved = localStorage.getItem('falconQuotes');
+            if (saved) {
+                appState.quotes = JSON.parse(saved);
+            }
+        }
+
+        // ==================== APP STATE ====================
         let appState = {
             currentView: 'home',
             showVINModal: false,
@@ -541,6 +650,9 @@
             ]
         };
 
+        loadQuotes();
+
+        // ==================== PARTS CATALOG ====================
         const PARTS_CATALOG = {
             'AW 450-43LE': {
                 name: 'AW 450-43LE',
@@ -575,6 +687,21 @@
                     { id: 'TH-1', name: 'Forward Clutch Pack', qty: 1, price: 95.00, availability: 'in_stock' },
                     { id: 'TH-2', name: 'Direct Clutch Pack', qty: 1, price: 105.00, availability: 'in_stock' },
                 ]
+            },
+            '700R4': {
+                name: '700R4 (GM)',
+                parts: [
+                    { id: 'GM700-1', name: 'Overdrive Clutch Pack', qty: 1, price: 135.00, availability: 'in_stock' },
+                    { id: 'GM700-2', name: 'Intermediate Clutch', qty: 1, price: 125.00, availability: 'in_stock' },
+                    { id: 'GM700-3', name: 'Low/Reverse Band', qty: 1, price: 85.00, availability: 'special_order' },
+                ]
+            },
+            'TH350': {
+                name: 'TH350 (GM)',
+                parts: [
+                    { id: 'TH350-1', name: 'Forward Clutch Pack', qty: 1, price: 105.00, availability: 'in_stock' },
+                    { id: 'TH350-2', name: 'Direct Clutch Pack', qty: 1, price: 115.00, availability: 'in_stock' },
+                ]
             }
         };
 
@@ -587,6 +714,7 @@
             { name: 'eBay', url: 'https://www.ebay.com', icon: '🏪' },
         ];
 
+        // ==================== UTILITY FUNCTIONS ====================
         function setState(newState) {
             appState = { ...appState, ...newState };
             render();
@@ -614,17 +742,19 @@
             return `${dateStr} • ${timeStr} ${tz}`;
         }
 
+        // ==================== RENDER FUNCTIONS ====================
         function renderHome() {
             return `
                 <div class="page">
                     <div class="container">
-                        <div class="home-header">
-                            <h1 class="home-title">FALCON TRANSMISSION</h1>
-                            <p class="home-subtitle">Shop Management Suite</p>
+                        <div class="logo-header">
+                            <div class="logo-text">FALCON</div>
+                            <div class="logo-subtitle">TRANSMISSION LLC</div>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 0.9rem;">Professional Shop Management Suite</p>
                         </div>
 
                         <div class="icon-grid">
-                            <button class="icon-btn highlight no-print" onclick="updateView('quote-builder')">
+                            <button class="icon-btn no-print" onclick="updateView('quote-builder')">
                                 <div class="icon-btn-icon">📋</div>
                                 <div class="icon-btn-label">New Quote</div>
                             </button>
@@ -648,9 +778,9 @@
                                 <div class="icon-btn-icon">📁</div>
                                 <div class="icon-btn-label">Quote History</div>
                             </button>
-                            <button class="icon-btn no-print" onclick="updateView('calendar')">
-                                <div class="icon-btn-icon">📅</div>
-                                <div class="icon-btn-label">Calendar</div>
+                            <button class="icon-btn no-print" onclick="updateView('analytics')">
+                                <div class="icon-btn-icon">📈</div>
+                                <div class="icon-btn-label">Analytics</div>
                             </button>
                             <button class="icon-btn no-print" onclick="updateView('settings')">
                                 <div class="icon-btn-icon">⚙️</div>
@@ -687,11 +817,11 @@
                             <div class="card">
                                 <div class="grid grid-2">
                                     <div>
-                                        <label>Quote #</label>
+                                        <label style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Quote #</label>
                                         <input type="text" id="quoteNumber" class="input-field mt-2" value="FL-${Date.now().toString().slice(-6)}" readonly>
                                     </div>
                                     <div>
-                                        <label>Date</label>
+                                        <label style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Date</label>
                                         <input type="date" id="quoteDate" class="input-field mt-2" value="${new Date().toISOString().split('T')[0]}">
                                     </div>
                                 </div>
@@ -718,7 +848,7 @@
                                 </div>
                                 <input type="text" id="vehicleVIN" class="input-field mt-2" placeholder="VIN">
                                 <div class="mt-2">
-                                    <label>Transmission Type</label>
+                                    <label style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Transmission Type</label>
                                     <select id="transmissionType" class="input-field mt-2">
                                         <option value="">Select Transmission</option>
                                         ${Object.keys(PARTS_CATALOG).map(key => `<option value="${key}">${PARTS_CATALOG[key].name}</option>`).join('')}
@@ -727,12 +857,12 @@
                             </div>
 
                             <div class="card">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                                     <h3 class="card-title mb-0">Line Items</h3>
                                     <button class="btn btn-primary no-print" onclick="showLineItemForm()" style="margin-bottom: 0;">+ Add Item</button>
                                 </div>
 
-                                <div id="lineItemForm" class="hidden" style="background: #4b5563; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                                <div id="lineItemForm" class="hidden" style="background: linear-gradient(135deg, #252525 0%, #2a2a2a 100%); padding: 1.5rem; border-radius: 0.75rem; margin-bottom: 1.5rem; border: 2px solid var(--border);">
                                     <div class="grid grid-2 mb-2">
                                         <select id="itemType" class="input-field">
                                             <option value="part">Part</option>
@@ -741,11 +871,11 @@
                                         </select>
                                     </div>
                                     <input type="text" id="itemDescription" class="input-field mb-2" placeholder="Description">
-                                    <div class="grid grid-2 gap" style="gap: 0.5rem;">
+                                    <div class="grid grid-2" style="gap: 0.75rem;">
                                         <input type="number" id="itemQty" class="input-field" placeholder="Qty" value="1" min="1" step="0.1">
                                         <input type="number" id="itemPrice" class="input-field" placeholder="Price" value="0" min="0" step="0.01">
                                     </div>
-                                    <div class="grid grid-2 gap mt-2" style="gap: 0.5rem;">
+                                    <div class="grid grid-2 mt-2" style="gap: 0.75rem;">
                                         <button class="btn btn-success" onclick="addLineItem()">Add Item</button>
                                         <button class="btn btn-secondary" onclick="hideLineItemForm()">Cancel</button>
                                     </div>
@@ -769,9 +899,10 @@
                                 </div>
                             </div>
 
-                            <div class="section no-print" style="margin-bottom: 2rem;">
-                                <button class="btn btn-primary" onclick="window.print()" style="width: 100%; justify-content: center; margin-bottom: 0.5rem;">🖨️ Print Quote</button>
-                                <button class="btn btn-success" onclick="exportPDF()" style="width: 100%; justify-content: center;">📥 Save as PDF</button>
+                            <div style="margin-bottom: 2rem;">
+                                <button class="btn btn-primary no-print" onclick="window.print()" style="width: 100%; justify-content: center; margin-bottom: 0.75rem;">🖨️ Print Quote</button>
+                                <button class="btn btn-success no-print" onclick="exportPDF()" style="width: 100%; justify-content: center;">📥 Save as PDF</button>
+                                <button class="btn btn-secondary no-print" onclick="saveCurrentQuote()" style="width: 100%; justify-content: center; margin-top: 0.75rem;">💾 Save Quote</button>
                             </div>
                         </div>
                     </div>
@@ -784,10 +915,10 @@
                 <div class="page">
                     <div class="container">
                         <button class="back-btn no-print" onclick="updateView('home')">← Back</button>
-                        <h1 style="margin-bottom: 2rem;">Parts Search</h1>
+                        <h1 style="margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">Parts Search</h1>
 
                         <div class="card no-print">
-                            <label>Select Transmission</label>
+                            <label style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Select Transmission</label>
                             <select id="partsTransmission" class="input-field mt-2" onchange="updatePartsList()">
                                 <option value="">Choose a transmission...</option>
                                 ${Object.keys(PARTS_CATALOG).map(key => `<option value="${key}">${PARTS_CATALOG[key].name}</option>`).join('')}
@@ -805,10 +936,10 @@
                 <div class="page">
                     <div class="container">
                         <button class="back-btn no-print" onclick="updateView('home')">← Back</button>
-                        <h1 style="margin-bottom: 2rem;">Transmission Selection</h1>
+                        <h1 style="margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">Transmission Selection</h1>
 
                         <div class="card no-print">
-                            <label>Quick Select</label>
+                            <label style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Quick Select</label>
                             <select id="transSelect" class="input-field mt-2" onchange="updateTransmissionInfo()">
                                 <option value="">Choose a transmission...</option>
                                 ${Object.keys(PARTS_CATALOG).map(key => `<option value="${key}">${PARTS_CATALOG[key].name}</option>`).join('')}
@@ -826,33 +957,33 @@
                 <div class="page">
                     <div class="container">
                         <button class="back-btn no-print" onclick="updateView('home')">← Back</button>
-                        <h1 style="margin-bottom: 2rem;">Active Quotes</h1>
+                        <h1 style="margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">Active Quotes</h1>
 
-                        ${appState.quotes.map(quote => `
+                        ${appState.quotes.length === 0 ? '<div class="card text-center"><p style="color: var(--text-secondary);">No quotes yet. <a href="#" onclick="updateView(\'quote-builder\'); return false;" style="color: var(--primary); text-decoration: none; font-weight: 600;">Create one now</a></p></div>' : appState.quotes.map(quote => `
                             <div class="card">
-                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
                                     <div>
-                                        <h3 style="margin-bottom: 0.25rem;">Quote #${quote.quoteNumber}</h3>
-                                        <p class="text-gray-400">${quote.customer}</p>
+                                        <h3 style="margin-bottom: 0.375rem; font-weight: 700;">Quote #${quote.quoteNumber}</h3>
+                                        <p style="color: var(--text-secondary); font-size: 0.9rem;">${quote.customer}</p>
                                     </div>
                                     <span class="badge ${quote.status === 'approved' ? 'badge-success' : 'badge-warning'}">${quote.status}</span>
                                 </div>
                                 <div class="grid grid-4">
                                     <div>
-                                        <p class="text-gray-400" style="font-size: 0.875rem;">Vehicle</p>
-                                        <p style="font-weight: 600;">${quote.vehicle}</p>
+                                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.375rem;">Vehicle</p>
+                                        <p style="font-weight: 700;">${quote.vehicle}</p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-400" style="font-size: 0.875rem;">Transmission</p>
-                                        <p style="font-weight: 600;">${quote.transmission}</p>
+                                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.375rem;">Transmission</p>
+                                        <p style="font-weight: 700;">${quote.transmission}</p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-400" style="font-size: 0.875rem;">Total</p>
+                                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.375rem;">Total</p>
                                         <p class="price">${formatCurrency(quote.total)}</p>
                                     </div>
                                     <div>
-                                        <p class="text-gray-400" style="font-size: 0.875rem;">Date</p>
-                                        <p style="font-weight: 600;">${new Date(quote.date).toLocaleDateString()}</p>
+                                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.375rem;">Date</p>
+                                        <p style="font-weight: 700;">${new Date(quote.date).toLocaleDateString()}</p>
                                     </div>
                                 </div>
                             </div>
@@ -867,7 +998,7 @@
                 <div class="page">
                     <div class="container">
                         <button class="back-btn no-print" onclick="updateView('home')">← Back</button>
-                        <h1 style="margin-bottom: 2rem;">Quote History</h1>
+                        <h1 style="margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">Quote History</h1>
 
                         <div class="card no-print">
                             <input type="text" id="searchQuotes" class="input-field" placeholder="Search by quote #, customer, or vehicle..." onkeyup="filterQuoteHistory()">
@@ -879,14 +1010,38 @@
             `;
         }
 
-        function renderCalendar() {
+        function renderAnalytics() {
+            const totalQuotes = appState.quotes.length;
+            const totalRevenue = appState.quotes.reduce((sum, q) => sum + q.total, 0);
+            const approvedQuotes = appState.quotes.filter(q => q.status === 'approved').length;
+
             return `
                 <div class="page">
                     <div class="container">
                         <button class="back-btn no-print" onclick="updateView('home')">← Back</button>
-                        <h1 style="margin-bottom: 2rem;">📅 Calendar</h1>
-                        <div class="card text-center">
-                            <p class="text-gray-400">Calendar feature coming in Phase 2 with job scheduling</p>
+                        <h1 style="margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">Analytics Dashboard</h1>
+
+                        <div class="grid grid-4">
+                            <div class="card text-center">
+                                <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">📊</div>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Total Quotes</p>
+                                <p class="price">${totalQuotes}</p>
+                            </div>
+                            <div class="card text-center">
+                                <div style="font-size: 2.5rem; color: #10b981; margin-bottom: 0.5rem;">✓</div>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Approved</p>
+                                <p class="price">${approvedQuotes}</p>
+                            </div>
+                            <div class="card text-center">
+                                <div style="font-size: 2.5rem; color: #f59e0b; margin-bottom: 0.5rem;">⏳</div>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Pending</p>
+                                <p class="price">${totalQuotes - approvedQuotes}</p>
+                            </div>
+                            <div class="card text-center">
+                                <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">💰</div>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Total Revenue</p>
+                                <p class="price" style="font-size: 1.2rem;">${formatCurrency(totalRevenue)}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -898,9 +1053,17 @@
                 <div class="page">
                     <div class="container">
                         <button class="back-btn no-print" onclick="updateView('home')">← Back</button>
-                        <h1 style="margin-bottom: 2rem;">⚙️ Settings</h1>
-                        <div class="card text-center">
-                            <p class="text-gray-400">Settings coming in Phase 2 (Admin, Tax Rate, Labor Rates)</p>
+                        <h1 style="margin-bottom: 2rem; font-family: 'Poppins', sans-serif;">⚙️ Settings</h1>
+                        
+                        <div class="card">
+                            <h3 class="card-title">Application Settings</h3>
+                            <button class="btn btn-danger" onclick="clearAllData()" style="width: 100%; justify-content: center; margin-bottom: 1rem;">🗑️ Clear All Data</button>
+                            <button class="btn btn-secondary" onclick="exportData()" style="width: 100%; justify-content: center; margin-bottom: 1rem;">📥 Export Data</button>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem; padding-top: 1rem; border-top: 2px solid var(--border);">
+                                <strong>Version:</strong> 2.0.0 - Premium Edition<br>
+                                <strong>Theme:</strong> <span id="themeDisplay">Dark Mode</span><br>
+                                <strong>Data:</strong> <span id="dataSize">Calculating...</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -910,14 +1073,14 @@
         function renderVINModal() {
             if (!appState.showVINModal) return '';
             return `
-                <div class="modal-overlay no-print" onclick="event.target === this && setState({ showVINModal: false })">
+                <div class="modal-overlay no-print" onclick="if(event.target === this) setState({ showVINModal: false })">
                     <div class="modal">
                         <div class="modal-header">
                             <h2>VIN Lookup</h2>
                             <button class="modal-close" onclick="setState({ showVINModal: false })">✕</button>
                         </div>
                         <div class="modal-body">
-                            <p class="text-gray-400 mb-4">Select a vendor to look up vehicle information by VIN:</p>
+                            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;">Select a vendor to look up vehicle information by VIN:</p>
                             <a href="https://transend.us" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center; margin-bottom: 1rem;">🔍 Open Transend.us VIN Decoder</a>
                             <a href="https://www.wittrans.com" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">🔍 Open WitTrans VIN Decoder</a>
                         </div>
@@ -929,6 +1092,7 @@
             `;
         }
 
+        // ==================== LINE ITEM FUNCTIONS ====================
         function showLineItemForm() {
             document.getElementById('lineItemForm').classList.remove('hidden');
         }
@@ -967,7 +1131,7 @@
 
         function renderLineItems() {
             if (!appState.currentQuote || !appState.currentQuote.lineItems) {
-                document.getElementById('lineItems').innerHTML = '<p class="text-gray-400 text-center" style="padding: 2rem;">No line items yet.</p>';
+                document.getElementById('lineItems').innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 2rem;">No line items yet.</p>';
                 return;
             }
 
@@ -996,6 +1160,7 @@
             document.getElementById('total').textContent = formatCurrency(total);
         }
 
+        // ==================== PARTS FUNCTIONS ====================
         function updatePartsList() {
             const trans = document.getElementById('partsTransmission').value;
             if (!trans) {
@@ -1008,12 +1173,12 @@
                 <div class="card">
                     <div style="display: flex; justify-content: space-between; align-items: start;">
                         <div style="flex: 1;">
-                            <h4 style="margin-bottom: 0.5rem;">${part.name}</h4>
-                            <p class="text-gray-400" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Part ID: ${part.id}</p>
+                            <h4 style="margin-bottom: 0.5rem; font-weight: 700;">${part.name}</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Part ID: ${part.id}</p>
                             <p class="price">${formatCurrency(part.price)}</p>
                         </div>
-                        <div style="text-align: right; margin-left: 1rem;">
-                            <p class="text-gray-400" style="font-size: 0.875rem; margin-bottom: 0.5rem;">Qty: ${part.qty}</p>
+                        <div style="text-align: right; margin-left: 1.5rem;">
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Qty: ${part.qty}</p>
                             ${getAvailabilityBadge(part.availability)}
                         </div>
                     </div>
@@ -1032,18 +1197,18 @@
 
             const catalog = PARTS_CATALOG[trans];
             const html = `
-                <div style="background: #4b5563; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #FF6B35;">
-                    <h4 style="margin-bottom: 0.75rem;">${catalog.name}</h4>
-                    <p class="text-gray-400 mb-2">Available Parts:</p>
-                    <div class="grid grid-2" style="gap: 0.5rem;">
+                <div style="background: linear-gradient(135deg, #252525 0%, #2a2a2a 100%); padding: 1.5rem; border-radius: 1rem; border-left: 4px solid var(--primary);">
+                    <h4 style="margin-bottom: 1rem; font-weight: 700;">${catalog.name}</h4>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Available Parts:</p>
+                    <div class="grid grid-2" style="gap: 0.75rem;">
                         ${catalog.parts.slice(0, 5).map(part => `
-                            <div style="background: #374151; padding: 0.75rem; border-radius: 0.375rem;">
-                                <p style="font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem;">${part.name}</p>
-                                <p class="price" style="font-size: 1rem;">${formatCurrency(part.price)}</p>
+                            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%); padding: 1rem; border-radius: 0.75rem; border: 1px solid var(--border);">
+                                <p style="font-weight: 700; font-size: 0.9rem; margin-bottom: 0.375rem;">${part.name}</p>
+                                <p class="price" style="font-size: 1.125rem;">${formatCurrency(part.price)}</p>
                             </div>
                         `).join('')}
                     </div>
-                    ${catalog.parts.length > 5 ? `<p class="text-gray-400 mt-2" style="font-size: 0.875rem;">...and ${catalog.parts.length - 5} more parts</p>` : ''}
+                    ${catalog.parts.length > 5 ? `<p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.85rem;">...and ${catalog.parts.length - 5} more parts</p>` : ''}
                 </div>
             `;
 
@@ -1051,6 +1216,7 @@
             document.getElementById('transInfo').classList.remove('hidden');
         }
 
+        // ==================== QUOTE HISTORY FUNCTIONS ====================
         function filterQuoteHistory() {
             const search = document.getElementById('searchQuotes').value.toLowerCase();
             const filtered = appState.quotes.filter(q =>
@@ -1063,18 +1229,45 @@
                 <div class="card">
                     <div style="display: flex; justify-content: space-between; align-items: start;">
                         <div style="flex: 1;">
-                            <h4 style="margin-bottom: 0.25rem;">Quote #${quote.quoteNumber}</h4>
-                            <p class="text-gray-400" style="font-size: 0.875rem;">${quote.customer} • ${quote.vehicle}</p>
+                            <h4 style="margin-bottom: 0.375rem; font-weight: 700;">Quote #${quote.quoteNumber}</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">${quote.customer} • ${quote.vehicle}</p>
                         </div>
-                        <div style="text-align: right; margin-left: 1rem;">
+                        <div style="text-align: right; margin-left: 1.5rem;">
                             <p class="price">${formatCurrency(quote.total)}</p>
-                            <p class="text-gray-400" style="font-size: 0.875rem;">${new Date(quote.date).toLocaleDateString()}</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem;">${new Date(quote.date).toLocaleDateString()}</p>
                         </div>
                     </div>
                 </div>
             `).join('');
 
-            document.getElementById('quoteHistoryList').innerHTML = html || '<div class="text-center text-gray-400">No quotes found.</div>';
+            document.getElementById('quoteHistoryList').innerHTML = html || '<div class="text-center" style="color: var(--text-secondary); padding: 2rem;">No quotes found.</div>';
+        }
+
+        // ==================== EXPORT FUNCTIONS ====================
+        function saveCurrentQuote() {
+            const quoteNum = document.getElementById('quoteNumber').value;
+            const customerName = document.getElementById('customerName').value;
+            
+            if (!customerName) {
+                alert('Please enter a customer name');
+                return;
+            }
+
+            const newQuote = {
+                id: appState.quotes.length + 1,
+                quoteNumber: quoteNum,
+                customer: customerName,
+                vehicle: document.getElementById('vehicleYear').value + ' ' + document.getElementById('vehicleMake').value + ' ' + document.getElementById('vehicleModel').value,
+                transmission: document.getElementById('transmissionType').value,
+                status: 'pending',
+                total: parseFloat(document.getElementById('total').textContent.replace('$', '').replace(',', '')),
+                date: document.getElementById('quoteDate').value
+            };
+
+            appState.quotes.push(newQuote);
+            saveQuotes();
+            alert('Quote saved successfully!');
+            updateView('quote-history');
         }
 
         function exportPDF() {
@@ -1088,29 +1281,31 @@
 <head>
     <title>Quote ${quoteNum}</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: white; color: #000; }
-        .header { margin-bottom: 30px; border-bottom: 3px solid #FF6B35; padding-bottom: 20px; }
-        h1 { margin: 0; color: #000; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 30px; background: white; color: #000; }
+        .header { margin-bottom: 30px; border-bottom: 3px solid #DC143C; padding-bottom: 20px; }
+        .company { font-size: 28px; font-weight: bold; color: #000; }
+        .subtitle { color: #666; margin-top: 5px; font-size: 12px; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-        th { background: #f0f0f0; padding: 10px; text-align: left; font-weight: bold; border-bottom: 1px solid #ccc; }
-        td { padding: 10px; border-bottom: 1px solid #eee; }
+        th { background: #f5f5f5; padding: 12px; text-align: left; font-weight: bold; border-bottom: 2px solid #DC143C; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
         .totals { text-align: right; width: 50%; margin-left: auto; }
-        .total-line { margin: 10px 0; font-weight: bold; }
-        .price { color: #FF6B35; }
+        .total-line { margin: 15px 0; font-weight: bold; }
+        .grand-total { font-size: 18px; color: #DC143C; border-top: 2px solid #DC143C; padding-top: 10px; }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>FALCON TRANSMISSION</h1>
-        <p>Quote #${quoteNum} | Customer: ${customerName}</p>
-        <p>Date: ${new Date().toLocaleDateString()}</p>
+        <div class="company">FALCON TRANSMISSION LLC</div>
+        <div class="subtitle">Professional Transmission Shop</div>
+        <div class="subtitle">Quote #${quoteNum} | ${new Date().toLocaleDateString()}</div>
+        <div class="subtitle" style="margin-top: 10px;">Customer: ${customerName}</div>
     </div>
     <table>
         <thead>
             <tr>
                 <th>Description</th>
                 <th>Qty</th>
-                <th>Price</th>
+                <th>Unit Price</th>
                 <th>Total</th>
             </tr>
         </thead>
@@ -1120,8 +1315,8 @@
     </table>
     <div class="totals">
         <div class="total-line">Subtotal: ${document.getElementById('subtotal').textContent}</div>
-        <div class="total-line">Tax: ${document.getElementById('tax').textContent}</div>
-        <div class="total-line price" style="font-size: 18px; border-top: 2px solid #FF6B35; padding-top: 10px;">TOTAL: ${total}</div>
+        <div class="total-line">Tax (8%): ${document.getElementById('tax').textContent}</div>
+        <div class="total-line grand-total">TOTAL: ${total}</div>
     </div>
 </body>
 </html>
@@ -1135,6 +1330,26 @@
             a.click();
         }
 
+        function clearAllData() {
+            if (confirm('Are you sure you want to delete all quotes? This cannot be undone!')) {
+                appState.quotes = [];
+                saveQuotes();
+                alert('All data cleared!');
+                updateView('home');
+            }
+        }
+
+        function exportData() {
+            const data = JSON.stringify(appState.quotes, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `falcon-quotes-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+        }
+
+        // ==================== MAIN RENDER FUNCTION ====================
         function render() {
             let content = '';
 
@@ -1158,8 +1373,8 @@
                 case 'quote-history':
                     content = renderQuoteHistory();
                     break;
-                case 'calendar':
-                    content = renderCalendar();
+                case 'analytics':
+                    content = renderAnalytics();
                     break;
                 case 'settings':
                     content = renderSettings();
@@ -1167,6 +1382,19 @@
             }
 
             document.getElementById('root').innerHTML = content + renderVINModal();
+
+            // Update theme display
+            const themeDisplay = document.getElementById('themeDisplay');
+            if (themeDisplay) {
+                themeDisplay.textContent = document.body.classList.contains('light-mode') ? 'Light Mode' : 'Dark Mode';
+            }
+
+            // Calculate data size
+            const dataSize = document.getElementById('dataSize');
+            if (dataSize) {
+                const size = (new Blob([JSON.stringify(appState.quotes)]).size / 1024).toFixed(2);
+                dataSize.textContent = size + ' KB';
+            }
 
             if (appState.currentView === 'home') {
                 const timeDisplay = document.getElementById('time-display');
