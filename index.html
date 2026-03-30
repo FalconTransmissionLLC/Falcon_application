@@ -3,22 +3,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Falcon Transmission - Professional Shop Management & Quoting System">
-    <meta name="theme-color" content="#111827">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Falcon TX">
-    <meta property="og:title" content="Falcon Transmission Shop Manager">
-    <meta property="og:description" content="Professional transmission shop management and quoting system">
-    <meta property="og:type" content="web application">
     <title>Falcon Transmission - Shop Manager</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
 ```
@@ -29,18 +21,15 @@
         background: linear-gradient(180deg, #111827 0%, #1f2937 50%, #111827 100%);
         color: #fff;
         line-height: 1.5;
-        overflow-x: hidden;
     }
 
     body {
-        -webkit-user-select: none;
         user-select: none;
     }
 
     input, select, textarea, button {
         font-family: inherit;
         font-size: inherit;
-        -webkit-user-select: text;
         user-select: text;
     }
 
@@ -49,18 +38,9 @@
         width: 100%;
     }
 
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #1f2937;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #FF6B35;
-        border-radius: 4px;
-    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #1f2937; }
+    ::-webkit-scrollbar-thumb { background: #FF6B35; border-radius: 4px; }
 
     .container {
         max-width: 1024px;
@@ -356,17 +336,6 @@
         color: #FFB347;
     }
 
-    .section {
-        margin-bottom: 2rem;
-    }
-
-    .section-title {
-        font-size: 1.125rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: #fff;
-    }
-
     .badge {
         display: inline-flex;
         align-items: center;
@@ -444,11 +413,6 @@
         font-size: 0.875rem;
     }
 
-    .quote-item-action {
-        flex-shrink: 0;
-        margin-left: 1rem;
-    }
-
     .hidden {
         display: none;
     }
@@ -461,22 +425,14 @@
         color: #9ca3af;
     }
 
-    .text-orange {
-        color: #FF6B35;
-    }
-
-    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-0 { margin-bottom: 0; }
     .mb-2 { margin-bottom: 0.5rem; }
     .mb-4 { margin-bottom: 1rem; }
-    .mb-6 { margin-bottom: 1.5rem; }
-
     .mt-2 { margin-top: 0.5rem; }
     .mt-4 { margin-top: 1rem; }
-    .mt-6 { margin-top: 1.5rem; }
 
     .page {
         min-height: 100vh;
-        background: linear-gradient(180deg, #111827 0%, #1f2937 50%, #111827 100%);
         padding: 1rem;
     }
 
@@ -512,20 +468,10 @@
     }
 
     @media print {
-        body {
-            background: white;
-            color: #000;
-        }
-        .page {
-            background: white;
-            padding: 0;
-        }
-        .no-print, .back-btn, button, .modal-overlay {
-            display: none !important;
-        }
-        .card {
-            page-break-inside: avoid;
-        }
+        body { background: white; color: #000; }
+        .page { background: white; padding: 0; }
+        .no-print, .back-btn, button, .modal-overlay { display: none !important; }
+        .card { page-break-inside: avoid; }
     }
 </style>
 ```
@@ -746,11 +692,11 @@
                                     </select>
                                 </div>
                                 <input type="text" id="itemDescription" class="input-field mb-2" placeholder="Description">
-                                <div class="grid grid-2 gap" style="gap: 0.5rem;">
+                                <div class="grid grid-2" style="gap: 0.5rem;">
                                     <input type="number" id="itemQty" class="input-field" placeholder="Qty" value="1" min="1" step="0.1">
                                     <input type="number" id="itemPrice" class="input-field" placeholder="Price" value="0" min="0" step="0.01">
                                 </div>
-                                <div class="grid grid-2 gap mt-2" style="gap: 0.5rem;">
+                                <div class="grid grid-2 mt-2" style="gap: 0.5rem;">
                                     <button class="btn btn-success" onclick="addLineItem()">Add Item</button>
                                     <button class="btn btn-secondary" onclick="hideLineItemForm()">Cancel</button>
                                 </div>
@@ -774,9 +720,9 @@
                             </div>
                         </div>
 
-                        <div class="section no-print" style="margin-bottom: 2rem;">
-                            <button class="btn btn-primary" onclick="window.print()" style="width: 100%; justify-content: center; margin-bottom: 0.5rem;">🖨️ Print Quote</button>
-                            <button class="btn btn-success" onclick="exportPDF()" style="width: 100%; justify-content: center;">📥 Save as PDF</button>
+                        <div style="margin-bottom: 2rem;">
+                            <button class="btn btn-primary no-print" onclick="window.print()" style="width: 100%; justify-content: center; margin-bottom: 0.5rem;">🖨️ Print Quote</button>
+                            <button class="btn btn-success no-print" onclick="exportPDF()" style="width: 100%; justify-content: center;">📥 Save as PDF</button>
                         </div>
                     </div>
                 </div>
@@ -915,7 +861,7 @@
     function renderVINModal() {
         if (!appState.showVINModal) return '';
         return `
-            <div class="modal-overlay no-print" onclick="event.target === this && setState({ showVINModal: false })">
+            <div class="modal-overlay no-print" onclick="if(event.target === this) setState({ showVINModal: false })">
                 <div class="modal">
                     <div class="modal-header">
                         <h2>VIN Lookup</h2>
