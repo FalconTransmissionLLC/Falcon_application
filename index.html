@@ -1088,54 +1088,50 @@
         const total = document.getElementById('total').textContent;
 
         const html = `
-```
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Quote ${quoteNum}</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: white; color: #000; }
+                    .header { margin-bottom: 30px; border-bottom: 3px solid #FF6B35; padding-bottom: 20px; }
+                    h1 { margin: 0; color: #000; }
+                    table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+                    th { background: #f0f0f0; padding: 10px; text-align: left; font-weight: bold; border-bottom: 1px solid #ccc; }
+                    td { padding: 10px; border-bottom: 1px solid #eee; }
+                    .totals { text-align: right; width: 50%; margin-left: auto; }
+                    .total-line { margin: 10px 0; font-weight: bold; }
+                    .price { color: #FF6B35; }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>FALCON TRANSMISSION</h1>
+                    <p>Quote #${quoteNum} | Customer: ${customerName}</p>
+                    <p>Date: ${new Date().toLocaleDateString()}</p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${(appState.currentQuote?.lineItems || []).map(item => `<tr><td>${item.description}</td><td>${item.quantity}</td><td>${formatCurrency(item.price)}</td><td>${formatCurrency(item.quantity * item.price)}</td></tr>`).join('')}
+                    </tbody>
+                </table>
+                <div class="totals">
+                    <div class="total-line">Subtotal: ${document.getElementById('subtotal').textContent}</div>
+                    <div class="total-line">Tax: ${document.getElementById('tax').textContent}</div>
+                    <div class="total-line price" style="font-size: 18px; border-top: 2px solid #FF6B35; padding-top: 10px;">TOTAL: ${total}</div>
+                </div>
+            </body>
+            </html>
+        `;
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Quote ${quoteNum}</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: white; color: #000; }
-        .header { margin-bottom: 30px; border-bottom: 3px solid #FF6B35; padding-bottom: 20px; }
-        h1 { margin: 0; color: #000; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-        th { background: #f0f0f0; padding: 10px; text-align: left; font-weight: bold; border-bottom: 1px solid #ccc; }
-        td { padding: 10px; border-bottom: 1px solid #eee; }
-        .totals { text-align: right; width: 50%; margin-left: auto; }
-        .total-line { margin: 10px 0; font-weight: bold; }
-        .price { color: #FF6B35; }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>FALCON TRANSMISSION</h1>
-        <p>Quote #${quoteNum} | Customer: ${customerName}</p>
-        <p>Date: ${new Date().toLocaleDateString()}</p>
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Qty</th>
-                <th>Price</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            ${(appState.currentQuote?.lineItems || []).map(item => `<tr><td>${item.description}</td><td>${item.quantity}</td><td>${formatCurrency(item.price)}</td><td>${formatCurrency(item.quantity * item.price)}</td></tr>`).join('')}
-        </tbody>
-    </table>
-    <div class="totals">
-        <div class="total-line">Subtotal: ${document.getElementById('subtotal').textContent}</div>
-        <div class="total-line">Tax: ${document.getElementById('tax').textContent}</div>
-        <div class="total-line price" style="font-size: 18px; border-top: 2px solid #FF6B35; padding-top: 10px;">TOTAL: ${total}</div>
-    </div>
-</body>
-</html>
-            `;
-
-```
         const blob = new Blob([html], { type: 'text/html' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
