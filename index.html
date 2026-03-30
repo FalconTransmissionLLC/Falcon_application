@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Falcon Transmission - Shop Management & Quoting System">
+    <meta name="description" content="Falcon Transmission - Professional Shop Management & Quoting System">
     <meta name="theme-color" content="#111827">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Falcon TX">
-    <title>Falcon Transmission - Shop Management</title>
+    <meta property="og:title" content="Falcon Transmission Shop Manager">
+    <meta property="og:description" content="Professional transmission shop management and quoting system">
+    <meta property="og:type" content="web application">
+    <title>Falcon Transmission - Shop Manager</title>
     <style>
         * {
             margin: 0;
@@ -59,7 +62,6 @@
         border-radius: 4px;
     }
 
-    /* Utility Classes */
     .container {
         max-width: 1024px;
         margin: 0 auto;
@@ -82,7 +84,6 @@
     .btn-primary {
         background: linear-gradient(135deg, #FF6B35 0%, #FF5722 100%);
         color: white;
-        border: none;
     }
 
     .btn-primary:hover {
@@ -391,11 +392,6 @@
         color: white;
     }
 
-    .badge-info {
-        background: #3b82f6;
-        color: white;
-    }
-
     .price {
         font-size: 1.25rem;
         font-weight: 700;
@@ -515,7 +511,6 @@
         font-size: 0.875rem;
     }
 
-    /* Print Styles */
     @media print {
         body {
             background: white;
@@ -541,7 +536,6 @@
 
 ```
 <script>
-    // ==================== STATE MANAGEMENT ====================
     let appState = {
         currentView: 'home',
         showVINModal: false,
@@ -598,7 +592,6 @@
         { name: 'eBay', url: 'https://www.ebay.com', icon: '🏪' },
     ];
 
-    // ==================== UTILITY FUNCTIONS ====================
     function setState(newState) {
         appState = { ...appState, ...newState };
         render();
@@ -626,7 +619,6 @@
         return `${dateStr} • ${timeStr} ${tz}`;
     }
 
-    // ==================== PAGE RENDERERS ====================
     function renderHome() {
         return `
             <div class="page">
@@ -693,7 +685,7 @@
                     <div class="page-header no-print">
                         <button class="back-btn" onclick="updateView('home')">← Back</button>
                         <h1>New Quote</h1>
-                        <button class="btn btn-success no-print" onclick="document.querySelector('#quote-section').style.display='none'; window.print(); document.querySelector('#quote-section').style.display='block';">🖨️ Print</button>
+                        <button class="btn btn-success no-print" onclick="window.print();">🖨️ Print</button>
                     </div>
 
                     <div id="quote-section">
@@ -942,7 +934,6 @@
         `;
     }
 
-    // ==================== INTERACTIVE FUNCTIONS ====================
     function showLineItemForm() {
         document.getElementById('lineItemForm').classList.remove('hidden');
     }
@@ -1105,13 +1096,15 @@
 <head>
     <title>Quote ${quoteNum}</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: white; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: white; color: #000; }
         .header { margin-bottom: 30px; border-bottom: 3px solid #FF6B35; padding-bottom: 20px; }
+        h1 { margin: 0; color: #000; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-        th { background: #f0f0f0; padding: 10px; text-align: left; font-weight: bold; }
+        th { background: #f0f0f0; padding: 10px; text-align: left; font-weight: bold; border-bottom: 1px solid #ccc; }
         td { padding: 10px; border-bottom: 1px solid #eee; }
         .totals { text-align: right; width: 50%; margin-left: auto; }
         .total-line { margin: 10px 0; font-weight: bold; }
+        .price { color: #FF6B35; }
     </style>
 </head>
 <body>
@@ -1121,13 +1114,22 @@
         <p>Date: ${new Date().toLocaleDateString()}</p>
     </div>
     <table>
-        <tr><th>Description</th><th>Qty</th><th>Price</th><th>Total</th></tr>
-        ${(appState.currentQuote?.lineItems || []).map(item => `<tr><td>${item.description}</td><td>${item.quantity}</td><td>${formatCurrency(item.price)}</td><td>${formatCurrency(item.quantity * item.price)}</td></tr>`).join('')}
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${(appState.currentQuote?.lineItems || []).map(item => `<tr><td>${item.description}</td><td>${item.quantity}</td><td>${formatCurrency(item.price)}</td><td>${formatCurrency(item.quantity * item.price)}</td></tr>`).join('')}
+        </tbody>
     </table>
     <div class="totals">
         <div class="total-line">Subtotal: ${document.getElementById('subtotal').textContent}</div>
         <div class="total-line">Tax: ${document.getElementById('tax').textContent}</div>
-        <div class="total-line" style="font-size: 18px; color: #FF6B35; border-top: 2px solid #FF6B35; padding-top: 10px;">TOTAL: ${total}</div>
+        <div class="total-line price" style="font-size: 18px; border-top: 2px solid #FF6B35; padding-top: 10px;">TOTAL: ${total}</div>
     </div>
 </body>
 </html>
@@ -1142,7 +1144,6 @@
         a.click();
     }
 
-    // ==================== MAIN RENDER ====================
     function render() {
         let content = '';
 
@@ -1176,7 +1177,6 @@
 
         document.getElementById('root').innerHTML = content + renderVINModal();
 
-        // Update time display on home page
         if (appState.currentView === 'home') {
             const timeDisplay = document.getElementById('time-display');
             if (timeDisplay) {
@@ -1188,19 +1188,16 @@
             }
         }
 
-        // Initialize quote builder
         if (appState.currentView === 'quote-builder') {
             renderLineItems();
             updateTotals();
         }
 
-        // Initialize quote history
         if (appState.currentView === 'quote-history') {
             filterQuoteHistory();
         }
     }
 
-    // ==================== INITIALIZE ====================
     render();
 </script>
 ```
